@@ -1,12 +1,15 @@
 import {
+  addDependenciesToPackageJson,
   addProjectConfiguration,
   formatFiles,
   generateFiles,
+  GeneratorCallback,
   getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
 import { NextjsGeneratorSchema } from './schema';
 
@@ -15,6 +18,23 @@ interface NormalizedSchema extends NextjsGeneratorSchema {
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
+}
+
+function updateDependencies(host: Tree) {
+  return addDependenciesToPackageJson(
+    host,
+    {
+      next: 'latest',
+      react: '^17.0.1',
+      'react-dom': '^17.0.1',
+    },
+    {
+      '@types/node': '^12.12.21',
+      '@types/react': '^17.0.2',
+      '@types/react-dom': '^17.0.1',
+      typescript: '4.0',
+    }
+  );
 }
 
 function normalizeOptions(
@@ -26,7 +46,7 @@ function normalizeOptions(
     ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(host).libsDir}/${projectDirectory}`;
+  const projectRoot = `${getWorkspaceLayout(host).appsDir}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -59,7 +79,7 @@ export default async function (host: Tree, options: NextjsGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
   addProjectConfiguration(host, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
-    projectType: 'library',
+    projectType: 'application',
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {
@@ -70,4 +90,7 @@ export default async function (host: Tree, options: NextjsGeneratorSchema) {
   });
   addFiles(host, normalizedOptions);
   await formatFiles(host);
+  const tasks: GeneratorCallback[] = [];
+  tasks.push(updateDependencies(host));
+  runTasksInSerial(...tasks);
 }
