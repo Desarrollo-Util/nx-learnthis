@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "nextjs",
+  "version": "0.0.1",
+  "generators": {
+    "nextjs": {
+      "factory": "./src/generators/nextjs/generator",
+      "schema": "./src/generators/nextjs/schema.json",
+      "description": "nextjs generator"
+    }
+  }
+}

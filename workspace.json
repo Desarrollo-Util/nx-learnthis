@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "projects": {
+    "nextjs": {
+      "root": "packages/nextjs",
+      "sourceRoot": "packages/nextjs/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/nextjs/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/packages/nextjs"
+          ],
+          "options": {
+            "jestConfig": "packages/nextjs/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/nextjs",
+            "tsConfig": "packages/nextjs/tsconfig.lib.json",
+            "packageJson": "packages/nextjs/package.json",
+            "main": "packages/nextjs/src/index.ts",
+            "assets": [
+              "packages/nextjs/*.md",
+              {
+                "input": "./packages/nextjs/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/nextjs",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/nextjs",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nextjs-e2e": {
+      "projectType": "application",
+      "root": "e2e/nextjs-e2e",
+      "sourceRoot": "e2e/nextjs-e2e/src",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "nextjs:build",
+            "npmPackageName": "@nx-learnthis/nextjs",
+            "pluginOutputPath": "dist/packages/nextjs",
+            "jestConfig": "e2e/nextjs-e2e/jest.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
+}
