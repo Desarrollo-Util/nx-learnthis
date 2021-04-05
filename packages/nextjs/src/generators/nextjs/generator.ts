@@ -3,50 +3,63 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  GeneratorCallback,
   getWorkspaceLayout,
+  installPackagesTask,
   names,
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
-import { NextjsGeneratorSchema } from './schema';
+import { NextJsGeneratorCLIOptions } from './schema';
 
-interface NormalizedSchema extends NextjsGeneratorSchema {
+interface NormalizedSchema extends NextJsGeneratorCLIOptions {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
 }
 
-function updateDependencies(host: Tree) {
-  return addDependenciesToPackageJson(
-    host,
-    {
-      next: 'latest',
-      react: '^17.0.1',
-      'react-dom': '^17.0.1',
-    },
-    {
-      '@types/node': '^12.12.21',
-      '@types/react': '^17.0.2',
-      '@types/react-dom': '^17.0.1',
-      typescript: '4.0',
-    }
-  );
-}
+/**
+ * Updates package.json with the new dependencies
+ * @param tree File system implementation
+ */
+const updateDependencies = (tree: Tree): void => {
+  const dependencies: Record<string, string> = {
+    next: 'latest',
+    react: '^17.0.1',
+    'react-dom': '^17.0.1',
+  };
 
-function normalizeOptions(
-  host: Tree,
-  options: NextjsGeneratorSchema
-): NormalizedSchema {
+  const devDependencies: Record<string, string> = {
+    '@types/node': '^12.12.21',
+    '@types/react': '^17.0.2',
+    '@types/react-dom': '^17.0.1',
+    typescript: '4.0',
+  };
+
+  addDependenciesToPackageJson(tree, dependencies, devDependencies);
+};
+
+/**
+ * Normalizes generator options obtained from CLI, adding:
+ *  - name: Project name
+ *  - directory: Project directory
+ *  - root folder: Project's root folder
+ *  - tags: Project's tags
+ * @param tree Custom file system implementation
+ * @param options CLI options
+ * @returns Normalized options
+ */
+const normalizeOptions = (
+  tree: Tree,
+  options: NextJsGeneratorCLIOptions
+): NormalizedSchema => {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(host).appsDir}/${projectDirectory}`;
+  const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -58,9 +71,9 @@ function normalizeOptions(
     projectDirectory,
     parsedTags,
   };
-}
+};
 
-function addFiles(host: Tree, options: NormalizedSchema) {
+function addFiles(tree: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
     ...names(options.name),
@@ -68,16 +81,16 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     template: '',
   };
   generateFiles(
-    host,
+    tree,
     path.join(__dirname, 'files'),
     options.projectRoot,
     templateOptions
   );
 }
 
-export default async function (host: Tree, options: NextjsGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(host, options);
-  addProjectConfiguration(host, normalizedOptions.projectName, {
+export default async function (tree: Tree, options: NextJsGeneratorCLIOptions) {
+  const normalizedOptions = normalizeOptions(tree, options);
+  addProjectConfiguration(tree, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
     projectType: 'application',
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
@@ -88,9 +101,15 @@ export default async function (host: Tree, options: NextjsGeneratorSchema) {
     },
     tags: normalizedOptions.parsedTags,
   });
-  addFiles(host, normalizedOptions);
-  await formatFiles(host);
-  const tasks: GeneratorCallback[] = [];
-  tasks.push(updateDependencies(host));
-  runTasksInSerial(...tasks);
+  addFiles(tree, normalizedOptions);
+
+  // Formats all created files using Prettier
+  await formatFiles(tree);
+
+  updateDependencies(tree);
+
+  return () => {
+    // Installs all package.json dependencies if not already installed
+    installPackagesTask(tree);
+  };
 }

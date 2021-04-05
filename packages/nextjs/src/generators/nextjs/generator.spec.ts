@@ -1,12 +1,11 @@
+import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readProjectConfiguration } from '@nrwl/devkit';
-
 import generator from './generator';
-import { NextjsGeneratorSchema } from './schema';
+import { NextJsGeneratorCLIOptions } from './schema';
 
 describe('nextjs generator', () => {
   let appTree: Tree;
-  const options: NextjsGeneratorSchema = { name: 'test' };
+  const options: NextJsGeneratorCLIOptions = { name: 'test' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
