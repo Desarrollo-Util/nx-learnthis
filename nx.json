@@ -1,6 +1,4 @@
 {
-  "npmScope": "nx-learnthis",
-  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": { "dependencies": "*", "devDependencies": "*" },
@@ -9,15 +7,14 @@
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
+  "affected": { "defaultBase": "master" },
+  "npmScope": "nx-learnthis",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
-  "projects": {
-    "nextjs": { "tags": [] },
-    "nextjs-e2e": { "tags": [], "implicitDependencies": ["nextjs"] }
-  },
-  "workspaceLayout": { "appsDir": "e2e", "libsDir": "packages" }
+  "workspaceLayout": { "appsDir": "libs", "libsDir": "packages" },
+  "projects": { "nextjs": { "tags": [] }, "tailwind-utils": { "tags": [] } }
 }

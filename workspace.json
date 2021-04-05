@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "cli": { "defaultCollection": "@nrwl/node" },
+  "defaultProject": "tailwind-utils",
   "projects": {
     "nextjs": {
       "root": "packages/nextjs",
@@ -8,17 +10,11 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "packages/nextjs/**/*.ts"
-            ]
-          }
+          "options": { "lintFilePatterns": ["packages/nextjs/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/packages/nextjs"
-          ],
+          "outputs": ["coverage/packages/nextjs"],
           "options": {
             "jestConfig": "packages/nextjs/jest.config.js",
             "passWithNoTests": true
@@ -26,9 +22,7 @@
         },
         "build": {
           "executor": "@nrwl/node:package",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/packages/nextjs",
             "tsConfig": "packages/nextjs/tsconfig.lib.json",
@@ -56,24 +50,21 @@
         }
       }
     },
-    "nextjs-e2e": {
+    "tailwind-utils": {
+      "root": "libs/tailwind-utils",
+      "sourceRoot": "libs/tailwind-utils/src",
       "projectType": "application",
-      "root": "e2e/nextjs-e2e",
-      "sourceRoot": "e2e/nextjs-e2e/src",
       "targets": {
-        "e2e": {
-          "executor": "@nrwl/nx-plugin:e2e",
+        "build": {
+          "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "target": "nextjs:build",
-            "npmPackageName": "@nx-learnthis/nextjs",
-            "pluginOutputPath": "dist/packages/nextjs",
-            "jestConfig": "e2e/nextjs-e2e/jest.config.js"
+            "commands": [
+              "tsc -p libs/tailwind-utils/tsconfig.app.json",
+              "npx cpx libs/tailwind-utils/package.json dist/libs/tailwind-utils"
+            ]
           }
         }
       }
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
   }
 }
