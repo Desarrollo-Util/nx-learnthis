@@ -1,4 +1,4 @@
-# Next JS template for NX  
+# Next JS plugin for NX  
 
 An [Nx](https://nx.dev) plugin for developing [NextJS](https://nextjs.org) applications with [Tailwind CSS](https://tailwindcss.com).
 
