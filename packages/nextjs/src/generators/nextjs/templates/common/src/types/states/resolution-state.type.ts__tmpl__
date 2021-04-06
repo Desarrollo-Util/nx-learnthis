@@ -1,0 +1,9 @@
+import { ResolutionBreakpoints } from '@<%= projectName %>/src/constants/config/resolution-breakpoints.enum';
+
+/** Resolution state type */
+export type ResolutionState = {
+	/** Current breakpoint */
+	resolution: ResolutionBreakpoints;
+	/** True if is a mobile resolution */
+	isMobile: boolean;
+};

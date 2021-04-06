@@ -8,6 +8,7 @@ import { addFiles } from './lib/add-files';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateDependencies } from './lib/update-dependencies';
 import { updateGlobalGitIgnore } from './lib/update-global-gitignore';
+import { updateGlobalTsConfig } from './lib/update-global-tsconfig';
 import { NextJsGeneratorCLIOptions } from './schema';
 
 export default async function (tree: Tree, options: NextJsGeneratorCLIOptions) {
@@ -25,6 +26,7 @@ export default async function (tree: Tree, options: NextJsGeneratorCLIOptions) {
 	});
 	addFiles(tree, normalizedOptions);
 	updateGlobalGitIgnore(tree);
+	updateGlobalTsConfig(tree, normalizedOptions);
 	// Formats all created files using Prettier
 	await formatFiles(tree);
 
