@@ -12,7 +12,7 @@ export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
 		...options,
 		...names(options.name),
 		offsetFromRoot: offsetFromRoot(options.projectRoot),
-		template: '',
+		tmpl: '',
 	};
 
 	// Copy common files

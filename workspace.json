@@ -37,7 +37,7 @@
 							},
 							{
 								"input": "packages/nextjs",
-								"glob": "**/files/**/.gitkeep",
+								"glob": "**/templates/**/.gitkeep",
 								"output": "."
 							},
 							{
