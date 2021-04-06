@@ -12,12 +12,21 @@ export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
 		...options,
 		...names(options.name),
 		offsetFromRoot: offsetFromRoot(options.projectRoot),
-		template: ''
+		template: '',
 	};
 
+	// Copy common files
 	generateFiles(
 		tree,
-		join(__dirname, '../files'),
+		join(__dirname, '../templates/common'),
+		options.projectRoot,
+		templateOptions
+	);
+
+	// Copy template-related files
+	generateFiles(
+		tree,
+		join(__dirname, `../templates/${options.template}`),
 		options.projectRoot,
 		templateOptions
 	);

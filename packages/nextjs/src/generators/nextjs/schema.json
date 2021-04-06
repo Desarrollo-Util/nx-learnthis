@@ -1,29 +1,47 @@
 {
-  "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
-  "id": "Nextjs",
-  "title": "Nextjs - Tailwind.CSS Generator",
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "description": "",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
-      "x-prompt": "What name would you like to use?"
-    },
-    "tags": {
-      "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    },
-    "directory": {
-      "type": "string",
-      "description": "A directory where the project is placed",
-      "alias": "d"
-    }
-  },
-  "required": ["name"]
+	"$schema": "http://json-schema.org/schema",
+	"cli": "nx",
+	"id": "Nextjs",
+	"title": "Nextjs - Tailwind.CSS Generator",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "",
+			"$default": {
+				"$source": "argv",
+				"index": 0
+			},
+			"x-prompt": "Project name"
+		},
+		"template": {
+			"type": "string",
+			"default": "basic",
+			"x-prompt": {
+				"message": "Select a template",
+				"type": "list",
+				"items": [
+					{
+						"value": "basic",
+						"label": "Basic"
+					},
+					{
+						"value": "auth",
+						"label": "With auth and URQL"
+					}
+				]
+			}
+		},
+		"tags": {
+			"type": "string",
+			"description": "Add tags to the project (used for linting)",
+			"alias": "t"
+		},
+		"directory": {
+			"type": "string",
+			"description": "A directory where the project is placed",
+			"alias": "d"
+		}
+	},
+	"required": ["name"]
 }

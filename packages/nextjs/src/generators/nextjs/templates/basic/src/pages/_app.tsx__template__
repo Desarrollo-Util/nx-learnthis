@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import { FC } from 'react';
 
+/** App basic */
 const App: FC<AppProps> = ({ Component, pageProps }) => {
 	return <Component {...pageProps} />;
 };

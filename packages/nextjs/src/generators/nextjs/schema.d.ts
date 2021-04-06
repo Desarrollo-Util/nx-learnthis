@@ -2,6 +2,8 @@
 export interface NextJsGeneratorCLIOptions {
 	/** Project name */
 	name: string;
+	/** Project template */
+	template: 'basic' | 'auth';
 	/** Project tags */
 	tags?: string;
 	/** Project directory */
