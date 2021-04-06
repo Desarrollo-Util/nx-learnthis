@@ -1,0 +1,20 @@
+/** Tailwind variants */
+export type TailwindVariants =
+	| 'responsive'
+	| 'dark'
+	| 'motion-safe'
+	| 'motion-reduce'
+	| 'first'
+	| 'last'
+	| 'odd'
+	| 'even'
+	| 'visited'
+	| 'checked'
+	| 'group-hover'
+	| 'group-focus'
+	| 'focus-within'
+	| 'hover'
+	| 'focus'
+	| 'focus-visible'
+	| 'active'
+	| 'disabled';

@@ -1,70 +1,75 @@
 {
-  "version": 2,
-  "cli": { "defaultCollection": "@nrwl/node" },
-  "defaultProject": "tailwind-utils",
-  "projects": {
-    "nextjs": {
-      "root": "packages/nextjs",
-      "sourceRoot": "packages/nextjs/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["packages/nextjs/**/*.ts"] }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/packages/nextjs"],
-          "options": {
-            "jestConfig": "packages/nextjs/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/packages/nextjs",
-            "tsConfig": "packages/nextjs/tsconfig.lib.json",
-            "packageJson": "packages/nextjs/package.json",
-            "main": "packages/nextjs/src/index.ts",
-            "assets": [
-              "packages/nextjs/*.md",
-              {
-                "input": "./packages/nextjs/src",
-                "glob": "**/*.!(ts)",
-                "output": "./src"
-              },
-              {
-                "input": "./packages/nextjs",
-                "glob": "generators.json",
-                "output": "."
-              },
-              {
-                "input": "./packages/nextjs",
-                "glob": "executors.json",
-                "output": "."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "tailwind-utils": {
-      "root": "libs/tailwind-utils",
-      "sourceRoot": "libs/tailwind-utils/src",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "tsc -p libs/tailwind-utils/tsconfig.app.json",
-              "npx cpx libs/tailwind-utils/package.json dist/libs/tailwind-utils"
-            ]
-          }
-        }
-      }
-    }
-  }
+	"version": 2,
+	"cli": { "defaultCollection": "@nrwl/node" },
+	"defaultProject": "tailwind-utils",
+	"projects": {
+		"nextjs": {
+			"root": "packages/nextjs",
+			"sourceRoot": "packages/nextjs/src",
+			"projectType": "library",
+			"targets": {
+				"lint": {
+					"executor": "@nrwl/linter:eslint",
+					"options": { "lintFilePatterns": ["packages/nextjs/**/*.ts"] }
+				},
+				"test": {
+					"executor": "@nrwl/jest:jest",
+					"outputs": ["coverage/packages/nextjs"],
+					"options": {
+						"jestConfig": "packages/nextjs/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"build": {
+					"executor": "@nrwl/node:package",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/packages/nextjs",
+						"tsConfig": "packages/nextjs/tsconfig.lib.json",
+						"packageJson": "packages/nextjs/package.json",
+						"main": "packages/nextjs/src/index.ts",
+						"assets": [
+							"packages/nextjs/*.md",
+							{
+								"input": "./packages/nextjs/src",
+								"glob": "**/*.!(ts)",
+								"output": "./src"
+							},
+							{
+								"input": "packages/nextjs",
+								"glob": "**/files/**/.gitkeep",
+								"output": "."
+							},
+							{
+								"input": "./packages/nextjs",
+								"glob": "generators.json",
+								"output": "."
+							},
+							{
+								"input": "./packages/nextjs",
+								"glob": "executors.json",
+								"output": "."
+							}
+						]
+					}
+				}
+			}
+		},
+		"tailwind-utils": {
+			"root": "libs/tailwind-utils",
+			"sourceRoot": "libs/tailwind-utils/src",
+			"projectType": "application",
+			"targets": {
+				"build": {
+					"executor": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": [
+							"tsc -p libs/tailwind-utils/tsconfig.app.json",
+							"npx cpx libs/tailwind-utils/package.json dist/libs/tailwind-utils"
+						]
+					}
+				}
+			}
+		}
+	}
 }

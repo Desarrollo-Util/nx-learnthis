@@ -2,3 +2,8 @@ export { generateIntRules } from './lib/generate-int-rules';
 export { generatePixelRules } from './lib/generate-pixel-rules';
 export { generateRemRules } from './lib/generate-rem-rules';
 export { generateResponsiveScreens } from './lib/generate-responsive-screens';
+export { absolutePlugin } from './plugins/absolute-plugin';
+export { containerPlugin } from './plugins/container-plugin';
+export { flexPlugin } from './plugins/flex-plugin';
+export { transitionPlugin } from './plugins/transition-plugin';
+export { truncatePlugin } from './plugins/truncate-plugin';

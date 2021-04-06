@@ -1,4 +1,16 @@
 {
-  "name": "learnthis-tailwind-utils",
-  "version": "0.0.1"
+	"name": "learnthis-tailwind-utils",
+	"description": "A set of utils to make easier Tailwind CSS configuration.",
+	"version": "0.0.2",
+	"main": "src/index.js",
+	"keywords": [
+		"tailwind",
+		"css"
+	],
+	"homepage": "https://github.com/Desarrollo-Util/nx-learnthis/tree/master/libs/tailwind-utils",
+	"license": "GPL-3.0",
+	"author": {
+		"name": "Desarrollo Útil",
+		"url": "https://github.com/Desarrollo-Util"
+	}
 }

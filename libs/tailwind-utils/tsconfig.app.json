@@ -4,7 +4,8 @@
     "rootDir": ".",
     "outDir": "../../dist/libs/tailwind-utils",
     "types": ["node"],
-    "sourceMap": false
+    "sourceMap": false,
+    "declaration": true
   },
   "include": ["**/*.ts", "**/package.json"]
 }

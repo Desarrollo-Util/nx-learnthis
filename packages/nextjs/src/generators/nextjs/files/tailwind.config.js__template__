@@ -1,0 +1,30 @@
+const colors = {
+	primary: {
+		300: '#9EF0F0',
+		DEFAULT: '#25CCCC',
+		700: '#129C9C',
+		800: '#006E6E',
+	}
+};
+
+module.exports = {
+	purge: ['./src/**/*.{ts,tsx}'],
+	theme: {
+		screens: {},
+		borderWidth: {},
+		fontSize: {},
+		colors,
+		fill: colors,
+	},
+	variants: {
+		extend: {
+			borderOpacity: ['disabled'],
+			borderWidth: ['disabled'],
+			borderColor: ['responsive', 'focus', 'disabled'],
+			backgroundColor: ['responsive', 'hover', 'disabled'],
+			textColor: ['responsive', 'hover', 'disabled'],
+			cursor: ['disabled'],
+		},
+	},
+	plugins: [],
+};
