@@ -1,0 +1,56 @@
+import { ResolutionBreakpoints } from '@<%= projectName %>/src/constants/config/resolution-breakpoints.enum';
+import { ResolutionBreakpointValues } from '@<%= projectName %>/src/constants/config/resolution.settings';
+import { ResolutionState } from '@<%= projectName %>/src/types/states/resolution-state.type';
+import { useCallback, useEffect, useState } from 'react';
+
+/**
+ * Gets the current screen resolution from the window size.
+ */
+const getResolution = (): ResolutionState => {
+	const innerWidth = window.innerWidth;
+
+	let resolution = ResolutionBreakpoints.LG;
+	let isMobile = false;
+
+	if (innerWidth <= ResolutionBreakpointValues.XS) {
+		resolution = ResolutionBreakpoints.XS;
+		isMobile = true;
+	} else if (innerWidth <= ResolutionBreakpointValues.SM) {
+		resolution = ResolutionBreakpoints.SM;
+		isMobile = true;
+	} else if (innerWidth <= ResolutionBreakpointValues.MD) {
+		resolution = ResolutionBreakpoints.MD;
+		isMobile = false;
+	}
+
+	return { resolution, isMobile };
+};
+
+/**
+ * Hook to handle screen resolution state and its associated side effects.
+ */
+export const useResolution = (): ResolutionState => {
+	const [resolutionState, setResolutionState] = useState<ResolutionState>({
+		resolution: ResolutionBreakpoints.XS,
+		isMobile: true,
+	});
+
+	const handleResize = useCallback(() => {
+		const newResolutionState = getResolution();
+		if (newResolutionState.resolution !== resolutionState.resolution) {
+			setResolutionState(newResolutionState);
+		}
+	}, [resolutionState]);
+
+	// Handles the window resize events that can modify the resolution state.
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		handleResize();
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, [resolutionState]);
+
+	return resolutionState;
+};

@@ -1,9 +1,19 @@
+import { ResolutionContext } from '@<%= projectName %>/src/lib/context/resolution.context';
+import { useResolution } from '@<%= projectName %>/src/lib/hooks/use-resolution';
 import { AppProps } from 'next/app';
 import { FC } from 'react';
 
 /** App basic */
 const App: FC<AppProps> = ({ Component, pageProps }) => {
-	return <Component {...pageProps} />;
+	const { componentProps } = pageProps;
+
+	const { resolution, isMobile } = useResolution();
+
+	return (
+		<ResolutionContext.Provider value={{ resolution, isMobile }}>
+			<Component {...componentProps} />
+		</ResolutionContext.Provider>
+	);
 };
 
 export default App;
