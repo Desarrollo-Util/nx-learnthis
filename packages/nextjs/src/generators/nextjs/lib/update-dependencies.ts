@@ -29,6 +29,7 @@ export const updateDependencies = (
 		postcss: '^8.2.9',
 		'stylelint-config-recommended': '^4.0.0',
 		tailwindcss: '^2.1.1',
+		'learnthis-tailwind-utils': '^0.0.6',
 	};
 
 	if (options.template === 'auth') {
