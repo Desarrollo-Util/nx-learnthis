@@ -16,6 +16,15 @@ export const transitionPlugin = (
 	variants?: TailwindVariants[]
 ) =>
 	tailwindPlugin(({ addUtilities }) => {
+		if (
+			typeof minTime !== 'number' ||
+			typeof maxTime !== 'number' ||
+			typeof increment !== 'number'
+		)
+			throw new Error(
+				'TransitionPlugin: You must specify "from", "to" and "increment" values'
+			);
+
 		const types = [
 			['all', 'all'],
 			['height', 'h'],
@@ -34,9 +43,6 @@ export const transitionPlugin = (
 			['ease-out', 'eo'],
 			['ease-in-out', 'eio'],
 		];
-
-		if (!minTime || !maxTime || !increment)
-			throw new Error('You must specify "from", "to" and "increment" values');
 
 		const rules: Record<string, Object>[] = [];
 

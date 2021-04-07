@@ -37,7 +37,7 @@ export const containerPlugin = (
 			typeof lg !== 'number'
 		)
 			throw new Error(
-				'All breakpoints "xs", "sm", "md" and "lg" must be provided'
+				'ContainerPlugin: All breakpoints "xs", "sm", "md" and "lg" must be provided'
 			);
 
 		if (

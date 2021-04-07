@@ -21,7 +21,9 @@ export const absolutePlugin = (
 			typeof to !== 'number' ||
 			typeof increment !== 'number'
 		)
-			throw new Error('You must specify "from", "to" and "increment" values');
+			throw new Error(
+				'AbsolutePlugin: You must specify "from", "to" and "increment" values'
+			);
 
 		const POSITIONS = ['top', 'bottom', 'left', 'right'];
 

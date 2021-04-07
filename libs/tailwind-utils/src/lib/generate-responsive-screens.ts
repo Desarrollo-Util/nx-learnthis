@@ -15,10 +15,14 @@ export const generateResponsiveScreens = (
 		typeof sm !== 'number' ||
 		typeof md !== 'number'
 	)
-		throw new Error('All breakpoints "xs", "sm" and "md" must be provided');
+		throw new Error(
+			'generateResponsiveScreens: All breakpoints "xs", "sm" and "md" must be provided'
+		);
 
 	if (!Number.isInteger(xs) || !Number.isInteger(sm) || !Number.isInteger(md))
-		throw new Error('All breakpoints must be integer');
+		throw new Error(
+			'generateResponsiveScreens: All breakpoints must be integer'
+		);
 
 	return {
 		xs: { max: `${xs}px` },
