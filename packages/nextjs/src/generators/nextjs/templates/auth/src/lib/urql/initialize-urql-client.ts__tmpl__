@@ -1,0 +1,33 @@
+import { SSRData } from 'next-urql';
+import { Client } from 'urql';
+import { createUrqlClient } from './create-urql-client';
+
+/** URQL client */
+let urqlClient: Client;
+/** Current JWT associated with URQL client */
+let currentJwt: string | undefined;
+
+/**
+ * Initializes an URQL client for frontend purposes
+ * @param jwt Auth JWT token
+ * @param lostAuth True if user lost his auth (expired token)
+ * @param initialCacheState Initial cache state
+ */
+export const initializeUrqlClient = (
+	jwt?: string,
+	lostAuth?: boolean,
+	initialCacheState?: SSRData
+) => {
+	//If apolloClient not exists previously or an auth change happen
+	if (!urqlClient || (jwt !== undefined && jwt !== currentJwt)) {
+		urqlClient = createUrqlClient(jwt, initialCacheState).client;
+		currentJwt = jwt;
+	}
+	//If client lost his auth state or client logout
+	else if (lostAuth || !jwt) {
+		urqlClient = createUrqlClient(jwt, undefined).client;
+		currentJwt = jwt;
+	}
+
+	return urqlClient;
+};

@@ -1,0 +1,93 @@
+import { authExchange } from '@urql/exchange-auth';
+import { multipartFetchExchange } from '@urql/exchange-multipart-fetch';
+import { SSRData, SSRExchange } from 'next-urql';
+import {
+	cacheExchange,
+	Client,
+	createClient,
+	dedupExchange,
+	errorExchange,
+	Operation,
+	ssrExchange,
+} from 'urql';
+
+/** URQL creation result */
+type UrqlCreation = {
+	/** URQL client */
+	client: Client;
+	/** URQL SSR exchange, to extract cache */
+	ssrExchange: SSRExchange;
+};
+
+/**
+ * Creates a new URQL client
+ * @param jwt Auth JWT token
+ * @param initialCacheState Initial cache state
+ */
+export const createUrqlClient = (
+	jwt?: string,
+	initialCacheState?: SSRData
+): UrqlCreation => {
+	const customAuthExchange = authExchange({
+		addAuthToOperation: ({ authState, operation }): Operation<any, any> => {
+			const fetchOptions =
+				typeof operation.context.fetchOptions === 'function'
+					? operation.context.fetchOptions()
+					: operation.context.fetchOptions || {};
+
+			return {
+				...operation,
+				context: {
+					...operation.context,
+					fetchOptions: {
+						...fetchOptions,
+						headers: {
+							...fetchOptions.headers,
+							Authorization: authState
+								? (authState as string)
+								: (fetchOptions.headers as any)?.Authorization,
+						},
+					},
+				},
+			};
+		},
+		getAuth: async () => (jwt ? `Bearer ${jwt}` : undefined),
+	});
+
+	const isServerSide = typeof window === 'undefined';
+
+	const customSsrExchange = ssrExchange({
+		isClient: !isServerSide,
+		initialState: !isServerSide ? initialCacheState : undefined,
+	});
+
+	const customErrorExchange = errorExchange({
+		onError: ({ graphQLErrors, networkError }) => {
+			if (graphQLErrors)
+				graphQLErrors.map(({ message, locations, path }) =>
+					console.log(
+						`[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
+							locations
+						)}, Path: ${path}`
+					)
+				);
+			if (networkError) console.log(`[Network error]: ${networkError}`);
+		},
+	});
+
+	return {
+		client: createClient({
+			url: process.env.NEXT_PUBLIC_GQL_URI as string,
+			requestPolicy: 'cache-and-network',
+			exchanges: [
+				dedupExchange,
+				customAuthExchange,
+				cacheExchange,
+				customSsrExchange,
+				multipartFetchExchange,
+				customErrorExchange,
+			],
+		}),
+		ssrExchange: customSsrExchange,
+	};
+};

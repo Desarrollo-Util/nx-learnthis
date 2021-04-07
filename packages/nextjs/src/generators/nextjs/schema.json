@@ -32,6 +32,60 @@
 				]
 			}
 		},
+		"useToast": {
+			"type": "boolean",
+			"default": true,
+			"x-prompt": {
+				"message": "Use toast (react-toastify)?",
+				"type": "list",
+				"items": [
+					{
+						"value": true,
+						"label": "Yes"
+					},
+					{
+						"value": false,
+						"label": "No"
+					}
+				]
+			}
+		},
+		"useFormikAndYup": {
+			"type": "boolean",
+			"default": true,
+			"x-prompt": {
+				"message": "Use Formik & Yup (formik + yup)?",
+				"type": "list",
+				"items": [
+					{
+						"value": true,
+						"label": "Yes"
+					},
+					{
+						"value": false,
+						"label": "No"
+					}
+				]
+			}
+		},
+		"useUuid": {
+			"type": "boolean",
+			"default": true,
+			"x-prompt": {
+				"message": "Use UUID (uuid-random)?",
+				"type": "list",
+				"items": [
+					{
+						"value": true,
+						"label": "Yes"
+					},
+					{
+						"value": false,
+						"label": "No"
+					}
+				]
+			}
+		},
 		"tags": {
 			"type": "string",
 			"description": "Add tags to the project (used for linting)",

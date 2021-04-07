@@ -1,4 +1,4 @@
-import { ResolutionBreakpoints } from '@<%= projectName %>/src/constants/config/resolution-breakpoints.enum';
+import { ResolutionBreakpoints } from '@<%= projectName %>/constants/config/resolution-breakpoints.enum';
 
 /** Resolution state type */
 export type ResolutionState = {

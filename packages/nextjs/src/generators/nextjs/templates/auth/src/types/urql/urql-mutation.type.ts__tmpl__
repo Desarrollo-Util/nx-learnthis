@@ -1,0 +1,7 @@
+import { OperationContext, OperationResult } from 'urql';
+
+/** URQL UseMutation result type */
+export type UrqlMutation = (
+	variables?: object | undefined,
+	context?: Partial<OperationContext> | undefined
+) => Promise<OperationResult<any, object>>;

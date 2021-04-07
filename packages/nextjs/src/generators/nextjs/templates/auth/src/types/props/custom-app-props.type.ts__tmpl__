@@ -1,0 +1,10 @@
+import { ComponentType } from 'react';
+import { GSSProps } from './gss-props.type';
+
+/** App props type */
+export type CustomAppProps = {
+	/** Component to render */
+	Component: ComponentType;
+	/** Page props */
+	pageProps: GSSProps;
+};

@@ -1,9 +1,44 @@
-import { AppProps } from 'next/app';
+import { AuthContext } from '@<%= projectName %>/lib/context/auth.context';
+import { ResolutionContext } from '@<%= projectName %>/lib/context/resolution.context';
+import { useAuthAndUrql } from '@<%= projectName %>/lib/hooks/use-auth-and-urql';
+import { useResolution } from '@<%= projectName %>/lib/hooks/use-resolution';
+import '@<%= projectName %>/styles/index.css';
+import { CustomAppProps } from '@<%= projectName %>/types/props/custom-app-props.type';
 import { FC } from 'react';
+import { Provider as UrqlProvider } from 'urql';
 
-/** App auth */
-const App: FC<AppProps> = ({ Component, pageProps }) => {
-	return <Component {...pageProps} />;
+<% if (useToast) { %>
+import { ToastContainer } from 'react-toastify';
+import { toastSettings } from '@<%= projectName %>/constants/config/toast.settings';
+<% } %>
+
+const App: FC<CustomAppProps> = ({ Component, pageProps }) => {
+	const { authProps, lostAuth, componentProps, urqlCache } = pageProps;
+
+	const { urqlClient, setAuth, stateAuth } = useAuthAndUrql(
+		authProps,
+		lostAuth,
+		urqlCache
+	);
+
+	const { resolution, isMobile } = useResolution();
+
+	return (
+		<% if (useToast) { %>
+		<>
+		<% } %>
+			<AuthContext.Provider value={{ stateAuth, setAuth }}>
+				<UrqlProvider value={urqlClient}>
+					<ResolutionContext.Provider value={{ resolution, isMobile }}>
+						<Component {...componentProps} />
+					</ResolutionContext.Provider>
+				</UrqlProvider>
+			</AuthContext.Provider>
+		<% if (useToast) { %>
+		<ToastContainer {...toastSettings} />
+		</>
+		<% } %>
+	);
 };
 
 export default App;

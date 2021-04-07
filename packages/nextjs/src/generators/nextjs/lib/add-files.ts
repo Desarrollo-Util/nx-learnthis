@@ -13,6 +13,7 @@ export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
 		...names(options.name),
 		offsetFromRoot: offsetFromRoot(options.projectRoot),
 		tmpl: '',
+		useToast: options.useToast,
 	};
 
 	// Copy common files
@@ -30,4 +31,12 @@ export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
 		options.projectRoot,
 		templateOptions
 	);
+
+	if (options.useToast)
+		generateFiles(
+			tree,
+			join(__dirname, '../templates/toast'),
+			options.projectRoot,
+			templateOptions
+		);
 };

@@ -30,7 +30,7 @@ export default async function (tree: Tree, options: NextJsGeneratorCLIOptions) {
 	// Formats all created files using Prettier
 	await formatFiles(tree);
 
-	updateDependencies(tree);
+	updateDependencies(tree, normalizedOptions);
 
 	return () => {
 		// Installs all package.json dependencies if not already installed

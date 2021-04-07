@@ -1,0 +1,9 @@
+import { UserProfile } from '@<%= projectName %>/types/user/user-profile.type';
+
+/** Auth state type */
+export type AuthState = {
+	/** Current user profile */
+	user?: UserProfile;
+	/** Current user JWT token */
+	jwt?: string;
+};

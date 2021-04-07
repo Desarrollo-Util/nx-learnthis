@@ -1,0 +1,16 @@
+import { AuthState } from '@<%= projectName %>/types/states/auth-state.type';
+import { SSRData } from 'next-urql';
+
+export type AuthProps = AuthState;
+
+/** Wrapper type for getServerSideProps result */
+export type GSSProps = {
+	/** Auth values */
+	authProps?: AuthProps;
+	/** True if authentication has been expired */
+	lostAuth?: boolean;
+	/** Props to pass trough the component */
+	componentProps?: any;
+	/** Urql client's cache */
+	urqlCache?: SSRData;
+};

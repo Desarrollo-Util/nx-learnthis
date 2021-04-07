@@ -1,7 +1,12 @@
-import { ResolutionContext } from '@<%= projectName %>/src/lib/context/resolution.context';
-import { useResolution } from '@<%= projectName %>/src/lib/hooks/use-resolution';
+import { ResolutionContext } from '@<%= projectName %>/lib/context/resolution.context';
+import { useResolution } from '@<%= projectName %>/lib/hooks/use-resolution';
 import { AppProps } from 'next/app';
 import { FC } from 'react';
+<% if (useToast) { %>
+import { ToastContainer } from 'react-toastify';
+import { toastSettings } from '@<%= projectName %>/constants/config/toast.settings';
+<% } %>
+import '@<%= projectName %>/styles/index.css';
 
 /** App basic */
 const App: FC<AppProps> = ({ Component, pageProps }) => {
@@ -10,9 +15,16 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 	const { resolution, isMobile } = useResolution();
 
 	return (
+		<% if (useToast) { %>
+		<>
+		<% } %>
 		<ResolutionContext.Provider value={{ resolution, isMobile }}>
 			<Component {...componentProps} />
 		</ResolutionContext.Provider>
+		<% if (useToast) { %>
+		<ToastContainer {...toastSettings} />
+		</>
+		<% } %>
 	);
 };
 

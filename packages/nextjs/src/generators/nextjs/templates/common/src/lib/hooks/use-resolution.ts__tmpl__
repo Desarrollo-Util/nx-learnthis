@@ -1,6 +1,6 @@
-import { ResolutionBreakpoints } from '@<%= projectName %>/src/constants/config/resolution-breakpoints.enum';
-import { ResolutionBreakpointValues } from '@<%= projectName %>/src/constants/config/resolution.settings';
-import { ResolutionState } from '@<%= projectName %>/src/types/states/resolution-state.type';
+import { ResolutionBreakpoints } from '@<%= projectName %>/constants/config/resolution-breakpoints.enum';
+import { ResolutionBreakpointValues } from '@<%= projectName %>/constants/config/resolution.settings';
+import { ResolutionState } from '@<%= projectName %>/types/states/resolution-state.type';
 import { useCallback, useEffect, useState } from 'react';
 
 /**

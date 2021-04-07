@@ -1,0 +1,6 @@
+import { OperationContext } from 'urql';
+
+/** URQL query refetch type */
+export type UrqlRefetch = (
+	opts?: Partial<OperationContext> | undefined
+) => void;

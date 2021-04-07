@@ -1,0 +1,31 @@
+import { initializeUrqlClient } from '@<%= projectName %>/lib/urql/initialize-urql-client';
+import { AuthProps } from '@<%= projectName %>/types/props/gss-props.type';
+import { AuthState } from '@<%= projectName %>/types/states/auth-state.type';
+import { SSRData } from 'next-urql';
+import { useEffect, useState } from 'react';
+
+/**
+ * Hook to handle the auth state and its Apollo client, as well as associated side effects.
+ * @param authProps
+ * @param lostAuth
+ * @param urqlCache
+ */
+export const useAuthAndUrql = (
+	authProps?: AuthProps,
+	lostAuth?: boolean,
+	urqlCache?: SSRData
+) => {
+	const [stateAuth, setAuth] = useState<AuthState>({
+		user: authProps?.user,
+		jwt: authProps?.jwt,
+	});
+
+	const urqlClient = initializeUrqlClient(stateAuth?.jwt, lostAuth, urqlCache);
+
+	// Create a new Apollo client after logout.
+	useEffect(() => {
+		if (!stateAuth) initializeUrqlClient(undefined, true);
+	}, [stateAuth]);
+
+	return { urqlClient, setAuth, stateAuth };
+};

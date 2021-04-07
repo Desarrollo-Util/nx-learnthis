@@ -1,4 +1,4 @@
-import { ResolutionState } from '@<%= projectName %>/src/types/states/resolution-state.type';
+import { ResolutionState } from '@<%= projectName %>/types/states/resolution-state.type';
 import { createContext } from 'react';
 
 export const ResolutionContext = createContext<ResolutionState>({} as any);

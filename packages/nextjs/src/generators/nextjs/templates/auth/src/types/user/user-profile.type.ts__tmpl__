@@ -1,0 +1,4 @@
+// TODO: Define user profile type
+
+/** User's auth profile fields */
+export type UserProfile = any;

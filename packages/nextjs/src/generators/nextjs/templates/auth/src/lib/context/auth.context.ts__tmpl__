@@ -1,0 +1,13 @@
+import { AuthState } from '@<%= projectName %>/types/states/auth-state.type';
+import { createContext, Dispatch, SetStateAction } from 'react';
+
+/** Auth context type */
+type IAuthContext = {
+	/** Auth state */
+	stateAuth: AuthState;
+	/** Auth setState */
+	setAuth: Dispatch<SetStateAction<AuthState>>;
+};
+
+/** Auth context */
+export const AuthContext = createContext<IAuthContext>({} as any);

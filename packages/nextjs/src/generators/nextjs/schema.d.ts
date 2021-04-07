@@ -4,6 +4,12 @@ export interface NextJsGeneratorCLIOptions {
 	name: string;
 	/** Project template */
 	template: 'basic' | 'auth';
+	/** Use react-toastify */
+	useToast: boolean;
+	/** Use formik and yup */
+	useFormikAndYup: boolean;
+	/** Use UUID */
+	useUuid: boolean;
 	/** Project tags */
 	tags?: string;
 	/** Project directory */

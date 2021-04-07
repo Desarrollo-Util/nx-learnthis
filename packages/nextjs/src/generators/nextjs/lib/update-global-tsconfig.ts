@@ -29,19 +29,19 @@ export const updateGlobalTsConfig = (
 			tree,
 			`${options.projectRoot}/tsconfig.json`,
 			(tsconfig: Record<string, any>) => {
-				const aliases = tsconfig.compilerOptions.alias || {};
+				const paths = tsconfig.compilerOptions.alias || {};
 
-				const projectAlias = `@${options.name}/*`;
+				const projectAlias = `@${options.projectName}/*`;
 
-				aliases[projectAlias] = [`${options.projectRoot}/src/*`];
+				paths[projectAlias] = [`${options.projectRoot}/src/*`];
 
 				for (const lib of libFolders) {
 					const alias = `@${lib.name}/*`;
 
-					aliases[alias] = [`${lib.src}/src/*`];
+					paths[alias] = [`${lib.src}/src/*`];
 				}
 
-				tsconfig.compilerOptions.alias = aliases;
+				tsconfig.compilerOptions.paths = paths;
 
 				return tsconfig;
 			}
