@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "module": "commonjs",
     "rootDir": ".",
     "outDir": "../../dist/libs/tailwind-utils",
     "types": ["node"],

@@ -6,23 +6,27 @@
  * @returns Screens property
  */
 export const generateResponsiveScreens = (
-  xs: number,
-  sm: number,
-  md: number
+	xs: number,
+	sm: number,
+	md: number
 ) => {
-  if (!xs || !sm || !md)
-    throw new Error('All breakpoints "xs", "sm" and "md" must be provided');
+	if (
+		typeof xs !== 'number' ||
+		typeof sm !== 'number' ||
+		typeof md !== 'number'
+	)
+		throw new Error('All breakpoints "xs", "sm" and "md" must be provided');
 
-  if (!Number.isInteger(xs) || !Number.isInteger(sm) || !Number.isInteger(md))
-    throw new Error('All breakpoints must be integer');
+	if (!Number.isInteger(xs) || !Number.isInteger(sm) || !Number.isInteger(md))
+		throw new Error('All breakpoints must be integer');
 
-  return {
-    xs: { max: `${xs}px` },
-    sm: { min: `${xs + 1}px`, max: `${sm}px` },
-    md: { min: `${sm + 1}px`, max: `${md}px` },
-    lg: { min: `${md + 1}px` },
-    xssm: { max: `${sm}px` },
-    smmd: { min: `${xs + 1}px`, max: `${md}px` },
-    mdlg: { min: `${md + 1}px` },
-  };
+	return {
+		xs: { max: `${xs}px` },
+		sm: { min: `${xs + 1}px`, max: `${sm}px` },
+		md: { min: `${sm + 1}px`, max: `${md}px` },
+		lg: { min: `${md + 1}px` },
+		xssm: { max: `${sm}px` },
+		smmd: { min: `${xs + 1}px`, max: `${md}px` },
+		mdlg: { min: `${md + 1}px` },
+	};
 };

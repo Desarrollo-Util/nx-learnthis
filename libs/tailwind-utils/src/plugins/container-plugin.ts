@@ -30,7 +30,12 @@ export const containerPlugin = (
 	tailwindPlugin(({ addUtilities }) => {
 		const { xs, sm, md, lg } = breakpoints;
 
-		if (!xs || !sm || !md || !lg)
+		if (
+			typeof xs !== 'number' ||
+			typeof sm !== 'number' ||
+			typeof md !== 'number' ||
+			typeof lg !== 'number'
+		)
 			throw new Error(
 				'All breakpoints "xs", "sm", "md" and "lg" must be provided'
 			);

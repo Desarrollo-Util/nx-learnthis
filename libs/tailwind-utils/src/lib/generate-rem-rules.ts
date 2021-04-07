@@ -9,19 +9,23 @@
  * @returns Rules
  */
 export const generateRemRules = (
-  from: number,
-  to: number,
-  increment: number
+	from: number,
+	to: number,
+	increment: number
 ) => {
-  if (!from || !to || !increment)
-    throw new Error('You must specify "from", "to" and "increment" values');
+	if (
+		typeof from !== 'number' ||
+		typeof to !== 'number' ||
+		typeof increment !== 'number'
+	)
+		throw new Error('You must specify "from", "to" and "increment" values');
 
-  const rules: Record<string, string> = {};
+	const rules: Record<string, string> = {};
 
-  for (let i = from; i <= to; i += increment) {
-    const name = i.toString().replace('.', '_');
-    rules[name] = `${i}rem`;
-  }
+	for (let i = from; i <= to; i += increment) {
+		const name = i.toString().replace('.', '_');
+		rules[name] = `${i}rem`;
+	}
 
-  return rules;
+	return rules;
 };
