@@ -17,6 +17,10 @@ export const updateDependencies = (
 	};
 
 	let devDependencies: Record<string, string> = {
+		'@babel/core': '7.9.6',
+		'@babel/preset-env': '7.9.6',
+		'@babel/preset-react': '7.9.4',
+		'@babel/preset-typescript': '7.9.0',
 		'@types/node': '^14.14.37',
 		'@types/react': '^17.0.3',
 		'@types/react-dom': '^17.0.3',
