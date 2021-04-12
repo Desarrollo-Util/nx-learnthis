@@ -21,19 +21,19 @@
 	},
 	"private": true,
 	"devDependencies": {
-		"@nrwl/cli": "11.6.0",
-		"@nrwl/devkit": "11.6.0",
-		"@nrwl/node": "11.6.0",
-		"@nrwl/nx-plugin": "^11.6.0",
-		"@nrwl/tao": "11.6.0",
-		"@nrwl/workspace": "11.6.0",
-		"@types/node": "14.14.33",
+		"@nrwl/cli": "12.0.1",
+		"@nrwl/devkit": "12.0.1",
+		"@nrwl/node": "12.0.1",
+		"@nrwl/nx-plugin": "^12.0.1",
+		"@nrwl/tao": "12.0.1",
+		"@nrwl/workspace": "12.0.1",
+		"@types/node": "14.14.37",
 		"cpx": "^1.5.0",
 		"dotenv": "8.2.0",
 		"prettier": "2.2.1",
-		"tailwindcss": "^2.1.0",
+		"tailwindcss": "^2.1.1",
 		"ts-node": "~9.1.1",
-		"tslib": "^2.0.0",
-		"typescript": "~4.0.3"
+		"tslib": "^2.2.0",
+		"typescript": "~4.2.4"
 	}
 }
