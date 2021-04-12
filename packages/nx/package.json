@@ -1,0 +1,20 @@
+{
+	"name": "@learnthis/nx",
+	"version": "0.0.9",
+	"description": "An NX plugin for developing NextJS applications with Tailwind CSS.",
+	"keywords": [
+		"nx",
+		"nextjs",
+		"tailwind",
+		"generators",
+		"executors"
+	],
+	"homepage": "https://github.com/Desarrollo-Util/nx-learnthis/tree/master/packages/nextjs",
+	"license": "GPL-3.0",
+	"author": {
+		"name": "Desarrollo Útil",
+		"url": "https://github.com/Desarrollo-Util"
+	},
+	"main": "src/index.js",
+	"generators": "./generators.json"
+}

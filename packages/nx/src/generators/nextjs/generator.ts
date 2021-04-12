@@ -17,7 +17,7 @@ export default async function (tree: Tree, options: NextJsGeneratorCLIOptions) {
 	const normalizedOptions = normalizeOptions(tree, options);
 	addProjectToWorkspace(tree, normalizedOptions);
 	addFiles(tree, normalizedOptions);
-	updateGlobalGitIgnore(tree);
+	updateGlobalGitIgnore(tree, normalizedOptions);
 	updateGlobalTsConfig(tree, normalizedOptions);
 	await formatFiles(tree);
 	updateDependencies(tree, normalizedOptions);

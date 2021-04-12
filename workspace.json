@@ -3,50 +3,38 @@
 	"cli": { "defaultCollection": "@nrwl/node" },
 	"defaultProject": "tailwind-utils",
 	"projects": {
-		"nextjs": {
-			"root": "packages/nextjs",
-			"sourceRoot": "packages/nextjs/src",
+		"nx": {
+			"root": "packages/nx",
+			"sourceRoot": "packages/nx/src",
 			"projectType": "library",
 			"targets": {
-				"lint": {
-					"executor": "@nrwl/linter:eslint",
-					"options": { "lintFilePatterns": ["packages/nextjs/**/*.ts"] }
-				},
-				"test": {
-					"executor": "@nrwl/jest:jest",
-					"outputs": ["coverage/packages/nextjs"],
-					"options": {
-						"jestConfig": "packages/nextjs/jest.config.js",
-						"passWithNoTests": true
-					}
-				},
 				"build": {
 					"executor": "@nrwl/node:package",
 					"outputs": ["{options.outputPath}"],
 					"options": {
-						"outputPath": "dist/packages/nextjs",
-						"tsConfig": "packages/nextjs/tsconfig.lib.json",
-						"packageJson": "packages/nextjs/package.json",
-						"main": "packages/nextjs/src/index.ts",
+						"outputPath": "dist/packages/nx",
+						"tsConfig": "packages/nx/tsconfig.lib.json",
+						"packageJson": "packages/nx/package.json",
+						"main": "packages/nx/src/index.ts",
 						"assets": [
-							"packages/nextjs/*.md",
+							"packages/nx/*.md",
 							{
-								"input": "./packages/nextjs/src",
+								"input": "./packages/nx/src",
 								"glob": "**/*.!(ts)",
 								"output": "./src"
 							},
 							{
-								"input": "packages/nextjs",
+								"input": "packages/nx",
 								"glob": "**/templates/**/.*",
 								"output": "."
 							},
 							{
-								"input": "./packages/nextjs",
+								"input": "./packages/nx",
 								"glob": "generators.json",
 								"output": "."
 							},
 							{
-								"input": "./packages/nextjs",
+								"input": "./packages/nx",
 								"glob": "executors.json",
 								"output": "."
 							}
