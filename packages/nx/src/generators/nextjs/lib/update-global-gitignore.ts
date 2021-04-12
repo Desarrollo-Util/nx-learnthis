@@ -2,8 +2,9 @@ import { logger, Tree } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 
 /**
- * Copies gitignore from template
+ * Updates workspace gitignore to add new project
  * @param tree File system implementation
+ * @param options Normalized options
  */
 export const updateGlobalGitIgnore = (
 	tree: Tree,

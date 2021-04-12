@@ -3,6 +3,7 @@ import { addFiles } from './lib/add-files';
 import { addProjectToWorkspace } from './lib/add-project-to-workspace';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateDependencies } from './lib/update-dependencies';
+import { updateGlobalBabelConfig } from './lib/update-global-babel-config';
 import { updateGlobalGitIgnore } from './lib/update-global-gitignore';
 import { updateGlobalTsConfig } from './lib/update-global-tsconfig';
 import { NextJsGeneratorCLIOptions } from './schema';
@@ -19,6 +20,7 @@ export default async function (tree: Tree, options: NextJsGeneratorCLIOptions) {
 	addFiles(tree, normalizedOptions);
 	updateGlobalGitIgnore(tree, normalizedOptions);
 	updateGlobalTsConfig(tree, normalizedOptions);
+	updateGlobalBabelConfig(tree);
 	await formatFiles(tree);
 	updateDependencies(tree, normalizedOptions);
 
