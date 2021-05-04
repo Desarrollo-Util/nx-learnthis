@@ -1,0 +1,27 @@
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule, MongooseModuleOptions } from '@nestjs/mongoose';
+import { CommonEnv } from '../../shared/common/infrastructure/enums/common-env.enum';
+
+/**
+ * Mongoose module, to manage database connection and model definitions
+ */
+@Module({
+	imports: [
+		MongooseModule.forRootAsync({
+			imports: [ConfigModule],
+			useFactory: (configService: ConfigService): MongooseModuleOptions => ({
+				uri: configService.get(CommonEnv.DATABASE_URI),
+				useNewUrlParser: true,
+				useUnifiedTopology: true,
+				useFindAndModify: false,
+				useCreateIndex: true,
+			}),
+			inject: [ConfigService],
+		}),
+		// TODO: Add schemas
+		MongooseModule.forFeature([]),
+	],
+	exports: [MongooseModule],
+})
+export class MongoDBModule {}

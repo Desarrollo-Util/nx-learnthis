@@ -1,0 +1,40 @@
+import { DITokenAuthRepository } from '../../domain/repository/auth-user-repository.ditoken';
+import { AuthUserRedisRepository } from '../auth-user-redis.repository';
+
+/** Repositories */
+const Repositories = [
+	{ provide: DITokenAuthRepository, useClass: AuthUserRedisRepository },
+];
+
+/** Query handlers */
+const QueryHandlers = [];
+
+/** Command handlers */
+const CommandHandlers = [];
+
+/** Event handlers */
+const EventHandlers = [];
+
+/** Use cases */
+const UseCases = [];
+
+/** Application service */
+const ApplicationServices = [];
+
+/** Domain service */
+const DomainServices = [];
+
+/** Graphql resolvers*/
+const Resolvers = [];
+
+/** Providers export */
+export const BC_SHARED_AUTH_Providers = [
+	...Repositories,
+	...CommandHandlers,
+	...QueryHandlers,
+	...EventHandlers,
+	...UseCases,
+	...ApplicationServices,
+	...DomainServices,
+	...Resolvers,
+];
