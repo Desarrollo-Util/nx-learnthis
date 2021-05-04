@@ -1,2 +1,0 @@
-/** Mongoose's schema names */
-export enum Schemas {}

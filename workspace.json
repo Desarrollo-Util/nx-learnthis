@@ -32,11 +32,6 @@
 								"input": "./packages/nx",
 								"glob": "generators.json",
 								"output": "."
-							},
-							{
-								"input": "./packages/nx",
-								"glob": "executors.json",
-								"output": "."
 							}
 						]
 					}
