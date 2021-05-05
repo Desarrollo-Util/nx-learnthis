@@ -1,5 +1,5 @@
-import { AggregateRoot } from '@learnthis/nest-cqrs';
-import { VOUuid } from '../../../common/domain/value-objects/uuid.vo';
+import { AggregateRoot } from '@nestjs/cqrs';
+import type { VOUuid } from '../../../common/domain/value-objects/uuid.vo';
 
 /**
  * Aggregate root: Auth user

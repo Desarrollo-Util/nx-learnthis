@@ -26,7 +26,7 @@ export abstract class PrimitiveValueObject<T extends Primitive> {
 	 * @param vo Value object to check
 	 * @returns True if both are equals
 	 */
-	public equals(vo?: PrimitiveValueObject<T>): boolean {
+	public equals(vo: PrimitiveValueObject<T>): boolean {
 		return vo.value === this.value;
 	}
 }

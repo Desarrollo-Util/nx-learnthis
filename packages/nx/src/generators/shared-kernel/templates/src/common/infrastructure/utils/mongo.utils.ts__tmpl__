@@ -1,5 +1,5 @@
-import { CriteriaOperator } from '../../domain/enums/criteria-operators.enum';
-import { FilterQuery } from 'mongoose';
+import type { FilterQuery } from 'mongoose';
+import { CriteriaOperator } from '../../../common/domain/enums/criteria-operators.enum';
 
 /**
  * Joins a set of filters into a unique mongoose filter query with an operator

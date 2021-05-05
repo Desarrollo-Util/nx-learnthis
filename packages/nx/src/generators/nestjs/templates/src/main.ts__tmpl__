@@ -1,0 +1,45 @@
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { CommonEnv } from '@shared-kernel/common/infrastructure/enums/common-env.enum';
+import { text as figletText } from 'figlet';
+import { AppModule } from './config/app/app.module';
+
+/**
+ * Checks if all environment variables are available in proccess.env before boot
+ */
+const checkEnv = () => {
+	Object.keys(CommonEnv).forEach(keyEnv => {
+		if (!process.env[keyEnv])
+			throw new Error(
+				`${keyEnv} missing, check the .env.example file and verify that the .env file contains the same variables`
+			);
+	});
+};
+
+/**
+ * Start application entrypoint.
+ */
+async function bootstrap() {
+	checkEnv();
+	const app = await NestFactory.create(AppModule);
+
+	const port: number = process.env[CommonEnv.PORT]
+		? Number(process.env[CommonEnv.PORT])
+		: 3000;
+	const self_domain: string = process.env[CommonEnv.SELF_DOMAIN]
+		? (process.env[CommonEnv.SELF_DOMAIN] as string)
+		: 'http://localhost';
+
+	app.enableCors();
+
+	await app.listen(port);
+
+	figletText('<%= projectName %>', function (err, data) {
+		if (err) return;
+		Logger.debug('\n' + data);
+	});
+
+	Logger.log(`Application is running on: ${self_domain}:${port}`, 'Main');
+}
+
+bootstrap();

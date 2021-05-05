@@ -18,7 +18,7 @@ export abstract class EnumValueObject<T> {
 	 * @param vo Value object to check
 	 * @returns True if both are equals
 	 */
-	public equals(vo?: EnumValueObject<T>): boolean {
+	public equals(vo: EnumValueObject<T>): boolean {
 		if (vo.value !== this.value) return false;
 
 		for (const possibleValue of vo.enumValues) {

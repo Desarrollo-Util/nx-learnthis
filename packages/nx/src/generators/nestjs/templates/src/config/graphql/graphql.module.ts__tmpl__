@@ -1,0 +1,27 @@
+import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { GqlModuleOptions, GraphQLModule } from '@nestjs/graphql';
+import { CommonEnv } from '@shared-kernel/common/infrastructure/enums/common-env.enum';
+import { join } from 'path';
+import { DateScalar } from './scalars/date.scalar';
+
+@Module({
+	imports: [
+		GraphQLModule.forRootAsync({
+			useFactory: (configService: ConfigService): GqlModuleOptions => {
+				const isDev = configService.get(CommonEnv.NODE_ENV) === 'dev';
+
+				return {
+					autoSchemaFile: join(__dirname, '../../schema.gql'),
+					sortSchema: true,
+					debug: isDev,
+					playground: isDev,
+					tracing: isDev,
+				};
+			},
+			inject: [ConfigService],
+		}),
+	],
+	providers: [DateScalar],
+})
+export class GqlModule {}

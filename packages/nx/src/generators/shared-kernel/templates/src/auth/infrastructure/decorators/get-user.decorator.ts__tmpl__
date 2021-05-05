@@ -13,7 +13,7 @@ export const GetGqlAuthUser = createParamDecorator(
  * Rest decorator for get auth user
  */
 export const GetRestAuthUser = createParamDecorator(
-	(data: unknown, ctx: ExecutionContext): any => {
+	(_, ctx: ExecutionContext): any => {
 		const request = ctx.switchToHttp().getRequest();
 		return request.user;
 	}

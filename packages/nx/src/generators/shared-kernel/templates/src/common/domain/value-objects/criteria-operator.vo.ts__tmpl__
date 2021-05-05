@@ -1,4 +1,4 @@
-import { EnumValueObject } from '../classes/value-objects/enum-value-object.class';
+import { EnumValueObject } from '../../../common/domain/classes/value-objects/enum-value-object.class';
 import { CriteriaOperator } from '../enums/criteria-operators.enum';
 
 /**

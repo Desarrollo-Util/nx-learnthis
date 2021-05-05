@@ -1,4 +1,4 @@
-import { PrimitiveValueObject } from '../classes/value-objects/primitive-value-object.class';
+import { PrimitiveValueObject } from '../../../common/domain/classes/value-objects/primitive-value-object.class';
 
 /**
  * Number value object

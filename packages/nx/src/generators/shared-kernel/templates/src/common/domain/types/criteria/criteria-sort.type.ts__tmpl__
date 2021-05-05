@@ -1,4 +1,4 @@
-import { CriteriaSortOptions } from '../../enums/criteria-sort-options.enum';
+import type { CriteriaSortOptions } from '../../enums/criteria-sort-options.enum';
 
 /** Find by criteria's sort */
 export type CriteriaSort<S> = {

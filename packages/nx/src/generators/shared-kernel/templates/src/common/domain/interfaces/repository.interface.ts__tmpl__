@@ -1,4 +1,4 @@
-import { AggregateRoot } from '@learnthis/nest-cqrs';
+import type { AggregateRoot } from '@nestjs/cqrs';
 
 /**
  * Interface that must be implemented by any repository

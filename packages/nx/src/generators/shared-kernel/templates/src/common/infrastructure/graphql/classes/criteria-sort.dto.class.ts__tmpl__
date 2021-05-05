@@ -1,6 +1,6 @@
-import { Type } from '@nestjs/common';
+import type { Type } from '@nestjs/common';
 import { Field, InputType } from '@nestjs/graphql';
-import { CriteriaSortOptions } from '../../../domain/enums/criteria-sort-options.enum';
+import { CriteriaSortOptions } from '../../../../common/domain/enums/criteria-sort-options.enum';
 
 /** Output class type */
 export type CriteriaSortDtoClass<T extends string | number> = {

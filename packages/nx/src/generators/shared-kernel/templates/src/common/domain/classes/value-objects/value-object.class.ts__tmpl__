@@ -25,7 +25,7 @@ export abstract class ValueObject<T extends ValueObjectProps> {
 	 * @param vo Value object to check
 	 * @returns True if both are equals
 	 */
-	public equals(vo?: ValueObject<T>): boolean {
+	public equals(vo: ValueObject<T>): boolean {
 		if (vo === null || vo === undefined || vo.value === undefined) {
 			return false;
 		}

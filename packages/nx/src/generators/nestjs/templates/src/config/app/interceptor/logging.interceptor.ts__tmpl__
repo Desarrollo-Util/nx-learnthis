@@ -1,0 +1,99 @@
+import { isEventContext } from '@learnthis/nest-cqrs';
+import {
+	CallHandler,
+	ExecutionContext,
+	Injectable,
+	Logger,
+	NestInterceptor,
+} from '@nestjs/common';
+import { GqlContextType, GqlExecutionContext } from '@nestjs/graphql';
+import type { Observable, OperatorFunction } from 'rxjs';
+import { finalize, timeout } from 'rxjs/operators';
+
+/**
+ * Interceptor for add logs and custom timeout to any incoming request
+ */
+@Injectable()
+export class LoggingInterceptor implements NestInterceptor {
+	/**
+	 * Interceptor delegate function
+	 *
+	 * @param  {ExecutionContext} context
+	 * @param  {CallHandler} next
+	 * @returns Observable
+	 */
+	intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+		const now = Date.now();
+		if (isEventContext(context)) {
+			return next
+				.handle()
+				.pipe(
+					finalize(() =>
+						Logger.log(
+							`EVENT - ${(context as any).constructorRef.name} ${
+								Date.now() - now
+							}ms`
+						)
+					)
+				);
+		} else if (context.getType() === 'http') {
+			const req = context.switchToHttp().getRequest();
+			const method = req.method;
+			const url = req.url;
+			return next
+				.handle()
+				.pipe(
+					finalize(() =>
+						Logger.log(
+							`HTTP - ${method} ${url} ${Date.now() - now}ms`,
+							context.getClass().name
+						)
+					)
+				);
+		} else if (context.getType<GqlContextType>() === 'graphql') {
+			const ctx: any = GqlExecutionContext.create(context);
+			const resolverClass = ctx.constructorRef.name;
+			const {
+				parentType: queryOrMutation,
+				fieldName: resolverName,
+			} = ctx.getInfo();
+
+			return next
+				.handle()
+				.pipe(
+					finalize(() =>
+						Logger.log(
+							`GRAPHQL - ${queryOrMutation} "${resolverName}" ${
+								Date.now() - now
+							}ms`,
+							resolverClass
+						)
+					)
+				);
+		} else {
+			return next
+				.handle()
+				.pipe(
+					finalize(() =>
+						Logger.log(
+							`UNHANDLED REQUEST - ${context.getType()}" ${Date.now() - now}ms`
+						)
+					)
+				);
+		}
+	}
+
+	/**
+	 * Sets a timeout when a certain condition is met.
+	 * @param condition Condition to met
+	 * @param milliseconds Timeout duration
+	 */
+	protected timeoutWhen<T>(
+		condition: boolean,
+		milliseconds: number
+	): OperatorFunction<T, T> {
+		return function (source: Observable<T>): Observable<T> {
+			return condition ? source.pipe(timeout(milliseconds)) : source;
+		};
+	}
+}
