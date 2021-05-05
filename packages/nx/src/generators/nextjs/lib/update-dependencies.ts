@@ -1,5 +1,5 @@
 import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
-import { NormalizedSchema } from '../schema';
+import type { NextJsNormalizedOptions } from '../schema';
 
 /**
  * Updates package.json with the new dependencies
@@ -7,7 +7,7 @@ import { NormalizedSchema } from '../schema';
  */
 export const updateDependencies = (
 	tree: Tree,
-	options: NormalizedSchema
+	options: NextJsNormalizedOptions
 ): void => {
 	let dependencies: Record<string, string> = {
 		next: '^10.1.3',

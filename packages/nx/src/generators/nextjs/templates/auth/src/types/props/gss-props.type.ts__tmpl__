@@ -1,5 +1,5 @@
-import { AuthState } from '@<%= projectName %>/types/states/auth-state.type';
-import { SSRData } from 'next-urql';
+import type { AuthState } from '@<%= projectName %>/types/states/auth-state.type';
+import type { SSRData } from 'next-urql';
 
 export type AuthProps = AuthState;
 

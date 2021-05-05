@@ -1,4 +1,4 @@
-import { AuthState } from '@<%= projectName %>/types/states/auth-state.type';
+import type { AuthState } from '@<%= projectName %>/types/states/auth-state.type';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 /** Auth context type */

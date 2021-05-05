@@ -1,17 +1,18 @@
-import { generateFiles, names, offsetFromRoot, Tree } from '@nrwl/devkit';
+import { generateFiles, Tree } from '@nrwl/devkit';
 import { join } from 'path';
-import { NormalizedSchema } from '../schema';
+import type { NextJsNormalizedOptions } from '../schema';
 
 /**
  * Copies files from template directory into file system
  * @param tree File system implementation
  * @param options Template options
  */
-export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
-	const templateOptions = {
+export const addFiles = (
+	tree: Tree,
+	options: NextJsNormalizedOptions
+): void => {
+	const templateVariables = {
 		...options,
-		...names(options.name),
-		offsetFromRoot: offsetFromRoot(options.projectRoot),
 		tmpl: '',
 	};
 
@@ -20,7 +21,7 @@ export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
 		tree,
 		join(__dirname, '../templates/common'),
 		options.projectRoot,
-		templateOptions
+		templateVariables
 	);
 
 	// Copy template-related files
@@ -28,7 +29,7 @@ export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
 		tree,
 		join(__dirname, `../templates/${options.template}`),
 		options.projectRoot,
-		templateOptions
+		templateVariables
 	);
 
 	if (options.useToast)
@@ -36,6 +37,6 @@ export const addFiles = (tree: Tree, options: NormalizedSchema): void => {
 			tree,
 			join(__dirname, '../templates/toast'),
 			options.projectRoot,
-			templateOptions
+			templateVariables
 		);
 };

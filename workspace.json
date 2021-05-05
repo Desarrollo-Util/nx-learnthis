@@ -13,7 +13,7 @@
 					"outputs": ["{options.outputPath}"],
 					"options": {
 						"outputPath": "dist/packages/nx",
-						"tsConfig": "packages/nx/tsconfig.lib.json",
+						"tsConfig": "packages/nx/tsconfig.json",
 						"packageJson": "packages/nx/package.json",
 						"main": "packages/nx/src/index.ts",
 						"assets": [

@@ -1,4 +1,4 @@
-import { OperationContext } from 'urql';
+import type { OperationContext } from 'urql';
 
 /** Urql query type */
 export type UrqlQuery = (opts?: Partial<OperationContext> | undefined) => void;

@@ -1,6 +1,6 @@
 import { authExchange } from '@urql/exchange-auth';
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch';
-import { SSRData, SSRExchange } from 'next-urql';
+import type { SSRData, SSRExchange } from 'next-urql';
 import {
 	cacheExchange,
 	Client,

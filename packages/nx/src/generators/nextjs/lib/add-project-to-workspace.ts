@@ -4,7 +4,7 @@ import {
 	ProjectConfiguration,
 	Tree,
 } from '@nrwl/devkit';
-import { NormalizedSchema } from '../schema';
+import type { NextJsNormalizedOptions } from '../schema';
 
 /**
  * Adds project to workspace and configure targets for it
@@ -13,8 +13,8 @@ import { NormalizedSchema } from '../schema';
  */
 export const addProjectToWorkspace = (
 	tree: Tree,
-	options: NormalizedSchema
-) => {
+	options: NextJsNormalizedOptions
+): void => {
 	const nxConfig: NxJsonProjectConfiguration = {
 		tags: options.parsedTags,
 	};

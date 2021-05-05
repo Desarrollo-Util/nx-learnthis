@@ -1,5 +1,5 @@
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
-import {
+import type {
 	SharedKernelGeneratorCLIOptions,
 	SharedKernelNormalizedSchema,
 } from '../schema';

@@ -1,5 +1,6 @@
-import { logger, Tree } from '@nrwl/devkit';
-import { NormalizedSchema } from '../schema';
+import type { Tree } from '@nrwl/devkit';
+import { addContentToGlobalGitIgnore } from '../../../utils/add-content-to-global-gitignore';
+import type { NextJsNormalizedOptions } from '../schema';
 
 /**
  * Updates workspace gitignore to add new project
@@ -8,25 +9,18 @@ import { NormalizedSchema } from '../schema';
  */
 export const updateGlobalGitIgnore = (
 	tree: Tree,
-	options: NormalizedSchema
+	options: NextJsNormalizedOptions
 ): void => {
-	if (tree.exists('.gitignore')) {
-		let content = tree.read('.gitignore').toString('utf-8');
+	let gitIgnoreContent = '';
+	gitIgnoreContent += `# NextJS - ${options.projectName} gitignore\n`;
+	gitIgnoreContent += '\n';
+	gitIgnoreContent += `${options.projectRoot}/.next/\n`;
+	gitIgnoreContent += `${options.projectRoot}/.vercel/\n`;
+	gitIgnoreContent += `${options.projectRoot}/build/\n`;
+	gitIgnoreContent += '\n';
+	gitIgnoreContent += `${options.projectRoot}/npm-debug.log*\n`;
+	gitIgnoreContent += '\n';
+	gitIgnoreContent += `${options.projectRoot}/.env\n`;
 
-		content += '\n';
-		content += `# NextJS - ${options.projectName} gitignore\n`;
-		content += '\n';
-		content += `${options.projectRoot}/.next/\n`;
-		content += `${options.projectRoot}/.vercel/\n`;
-		content += `${options.projectRoot}/build/\n`;
-		content += '\n';
-		content += `${options.projectRoot}/npm-debug.log*\n`;
-		content += '\n';
-		content += `${options.projectRoot}/.env\n`;
-		content += '\n';
-
-		tree.write('.gitignore', content);
-	} else {
-		logger.warn(`Couldn't find .gitignore file to update`);
-	}
+	addContentToGlobalGitIgnore(tree, gitIgnoreContent);
 };

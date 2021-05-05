@@ -1,22 +1,49 @@
 {
   "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "nx-learnthis/nextjs": ["packages/nextjs/src/index.ts"]
-    }
-  },
+	"compilerOptions": {
+		// PROJECT OPTIONS
+		"allowJs": true,
+		"checkJs": false,
+		"declaration": true,
+		"declarationMap": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"lib": ["DOM","ES2018"],
+		"module": "CommonJS",
+		"removeComments": true,
+		"sourceMap": true,
+		"target": "ES2018",
+		// STRICT CHECKS
+		"alwaysStrict": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": false,
+		// MODULE RESOLUTION
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "./",
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"paths": {},
+		// LINTER CHECKS
+		"noFallthroughCasesInSwitch": true,
+		// Needs Typescript 4.3 (currently in beta)
+		// "noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		// EXPERIMENTAL
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		// ADVANCED
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"forceConsistentCasingInFileNames": true,
+		"importsNotUsedAsValues": "error",
+		"resolveJsonModule":true,
+		"skipLibCheck": true
+	},
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,6 +1,6 @@
 import { generateFiles, names, offsetFromRoot, Tree } from '@nrwl/devkit';
 import { join } from 'path';
-import { SharedKernelNormalizedSchema } from '../schema';
+import type { SharedKernelNormalizedSchema } from '../schema';
 
 /**
  * Copies files from template directory into file system

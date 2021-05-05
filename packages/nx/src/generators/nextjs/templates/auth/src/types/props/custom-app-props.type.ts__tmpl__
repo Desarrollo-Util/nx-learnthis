@@ -1,5 +1,5 @@
-import { ComponentType } from 'react';
-import { GSSProps } from './gss-props.type';
+import type { ComponentType } from 'react';
+import type { GSSProps } from './gss-props.type';
 
 /** App props type */
 export type CustomAppProps = {

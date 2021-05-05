@@ -1,4 +1,4 @@
-import { UserProfile } from '@<%= projectName %>/types/user/user-profile.type';
+import type { UserProfile } from '@<%= projectName %>/types/user/user-profile.type';
 
 /** Auth state type */
 export type AuthState = {

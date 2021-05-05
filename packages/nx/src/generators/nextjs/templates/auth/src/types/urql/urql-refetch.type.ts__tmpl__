@@ -1,4 +1,4 @@
-import { OperationContext } from 'urql';
+import type { OperationContext } from 'urql';
 
 /** URQL query refetch type */
 export type UrqlRefetch = (

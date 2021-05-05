@@ -1,4 +1,4 @@
-import { OperationContext, OperationResult } from 'urql';
+import type { OperationContext, OperationResult } from 'urql';
 
 /** URQL UseMutation result type */
 export type UrqlMutation = (

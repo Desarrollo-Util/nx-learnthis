@@ -1,6 +1,6 @@
 import { formatFiles, installPackagesTask, Tree } from '@nrwl/devkit';
 import sharedLib from './lib';
-import { SharedKernelGeneratorCLIOptions } from './schema';
+import type { SharedKernelGeneratorCLIOptions } from './schema';
 
 export default async (tree: Tree, options: SharedKernelGeneratorCLIOptions) => {
 	const { normalizeOptions, addFiles, updateDependencies } = sharedLib;

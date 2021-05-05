@@ -1,5 +1,5 @@
 /** Values obtained from CLI */
-export interface NextJsGeneratorCLIOptions {
+export interface NextJsCLIOptions {
 	/** Project name */
 	name: string;
 	/** Project template */
@@ -17,13 +17,12 @@ export interface NextJsGeneratorCLIOptions {
 }
 
 /** Normalized options, with project names */
-export interface NormalizedSchema extends NextJsGeneratorCLIOptions {
+export interface NextJsNormalizedOptions
+	extends Omit<NextJsCLIOptions, '_name'> {
 	/** Project name */
 	projectName: string;
 	/** Project root folder */
 	projectRoot: string;
-	/** Project directory */
-	projectDirectory: string;
 	/** Tags parsed to array */
 	parsedTags: string[];
 }
