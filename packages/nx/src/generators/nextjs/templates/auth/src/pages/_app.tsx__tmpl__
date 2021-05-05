@@ -3,8 +3,8 @@ import { ResolutionContext } from '@<%= projectName %>/lib/context/resolution.co
 import { useAuthAndUrql } from '@<%= projectName %>/lib/hooks/use-auth-and-urql';
 import { useResolution } from '@<%= projectName %>/lib/hooks/use-resolution';
 import '@<%= projectName %>/styles/index.css';
-import { CustomAppProps } from '@<%= projectName %>/types/props/custom-app-props.type';
-import { FC } from 'react';
+import type { CustomAppProps } from '@<%= projectName %>/types/props/custom-app-props.type';
+import type { FC } from 'react';
 import { Provider as UrqlProvider } from 'urql';
 
 <% if (useToast) { %>

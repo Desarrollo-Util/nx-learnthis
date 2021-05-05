@@ -1,7 +1,7 @@
 import { ResolutionContext } from '@<%= projectName %>/lib/context/resolution.context';
 import { useResolution } from '@<%= projectName %>/lib/hooks/use-resolution';
-import { AppProps } from 'next/app';
-import { FC } from 'react';
+import type { AppProps } from 'next/app';
+import type { FC } from 'react';
 <% if (useToast) { %>
 import { ToastContainer } from 'react-toastify';
 import { toastSettings } from '@<%= projectName %>/constants/config/toast.settings';

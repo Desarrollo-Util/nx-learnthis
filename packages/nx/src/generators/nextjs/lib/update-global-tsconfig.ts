@@ -1,10 +1,4 @@
-import {
-	logger,
-	readJson,
-	Tree,
-	updateJson,
-	WorkspaceJsonConfiguration,
-} from '@nrwl/devkit';
+import { logger, Tree, updateJson } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 
 /**
@@ -16,39 +10,18 @@ export const updateGlobalTsConfig = (
 	tree: Tree,
 	options: NormalizedSchema
 ): void => {
-	const workspace = readJson<WorkspaceJsonConfiguration>(
-		tree,
-		'workspace.json'
-	);
-	const libFolders = Object.entries(workspace.projects)
-		.filter(project => project[1].projectType === 'library')
-		.map(project => ({ name: project[0], src: project[1].root }));
+	if (tree.exists(`tsconfig.base.json`)) {
+		updateJson(tree, `tsconfig.base.json`, (tsconfig: Record<string, any>) => {
+			const paths = tsconfig.compilerOptions.paths || {};
 
-	if (tree.exists(`${options.projectRoot}/tsconfig.json`)) {
-		updateJson(
-			tree,
-			`${options.projectRoot}/tsconfig.json`,
-			(tsconfig: Record<string, any>) => {
-				const paths = tsconfig.compilerOptions.alias || {};
+			paths[`@${options.projectName}`] = [`${options.projectRoot}/src`];
+			paths[`@${options.projectName}/*`] = [`${options.projectRoot}/src/*`];
 
-				const projectAlias = `@${options.projectName}/*`;
+			tsconfig.compilerOptions.paths = paths;
 
-				paths[projectAlias] = [`${options.projectRoot}/src/*`];
-
-				for (const lib of libFolders) {
-					const alias = `@${lib.name}/*`;
-
-					paths[alias] = [`${lib.src}/src/*`];
-				}
-
-				tsconfig.compilerOptions.paths = paths;
-
-				return tsconfig;
-			}
-		);
+			return tsconfig;
+		});
 	} else {
-		logger.warn(
-			`Couldn't find ${options.projectRoot}/tsconfig.json file to update`
-		);
+		logger.warn(`Couldn't find tsconfig.base.json file to update`);
 	}
 };
