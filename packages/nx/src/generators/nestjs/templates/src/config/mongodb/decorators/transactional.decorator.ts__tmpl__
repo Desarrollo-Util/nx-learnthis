@@ -1,5 +1,5 @@
 import { InternalServerErrorException } from '@nestjs/common';
-import { CommonErrors } from '@shared-kernel/common/infrastructure/enums/common-errors.enum';
+import { CommonErrors } from '@<%= sharedAlias %>/common/infrastructure/enums/common-errors.enum';
 import { createHook, executionAsyncId } from 'async_hooks';
 import { ClientSession, connections } from 'mongoose';
 

@@ -1,5 +1,7 @@
 import { formatFiles, installPackagesTask, Tree } from '@nrwl/devkit';
+import { Tags } from '../../constants/tags.enum';
 import { addPathAliasToGlobalTsConfig } from '../../utils/add-path-alias-to-global-tsconfig';
+import { findProjectsByTag } from '../../utils/find-projects-by-tag';
 import {
 	addFiles,
 	addProjectToWorkspace,
@@ -10,8 +12,16 @@ import type { NestJsCLIOptions } from './schema';
 
 export default async (tree: Tree, options: NestJsCLIOptions) => {
 	const normalizedOptions = normalizeOptions(tree, options);
-	addProjectToWorkspace(tree, normalizedOptions);
-	addFiles(tree, normalizedOptions);
+
+	const sharedProjectName = findProjectsByTag(tree, Tags.NEST_SHARED)[0];
+
+	if (!sharedProjectName)
+		throw new Error(
+			'You must create a shared-kernel project before run this generator'
+		);
+
+	addProjectToWorkspace(tree, normalizedOptions, sharedProjectName);
+	addFiles(tree, normalizedOptions, sharedProjectName);
 	await formatFiles(tree);
 	updateDependencies(tree);
 	addPathAliasToGlobalTsConfig(

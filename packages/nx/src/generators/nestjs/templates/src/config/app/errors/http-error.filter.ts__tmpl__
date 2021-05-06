@@ -15,15 +15,15 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { GqlContextType } from '@nestjs/graphql';
-import { CommonConflictException } from '@shared-kernel/common/exceptions/common-conflict.exception';
-import { CommonDuplicateIdentifierException } from '@shared-kernel/common/exceptions/common-duplicate-identifier.exception';
-import { CommonForbiddenException } from '@shared-kernel/common/exceptions/common-forbidden.exception';
-import { CommonFormatException } from '@shared-kernel/common/exceptions/common-format.exception';
-import { CommonNotApplicablenException } from '@shared-kernel/common/exceptions/common-not-applicable.exception';
-import { CommonResourceNotFoundException } from '@shared-kernel/common/exceptions/common-resource-not-found.exception';
-import { CommonUnauthorizedException } from '@shared-kernel/common/exceptions/common-unauthorized.exception';
-import { CommonEnv } from '@shared-kernel/common/infrastructure/enums/common-env.enum';
-import { CommonErrors } from '@shared-kernel/common/infrastructure/enums/common-errors.enum';
+import { CommonConflictException } from '@<%= sharedAlias %>/common/exceptions/common-conflict.exception';
+import { CommonDuplicateIdentifierException } from '@<%= sharedAlias %>/common/exceptions/common-duplicate-identifier.exception';
+import { CommonForbiddenException } from '@<%= sharedAlias %>/common/exceptions/common-forbidden.exception';
+import { CommonFormatException } from '@<%= sharedAlias %>/common/exceptions/common-format.exception';
+import { CommonNotApplicablenException } from '@<%= sharedAlias %>/common/exceptions/common-not-applicable.exception';
+import { CommonResourceNotFoundException } from '@<%= sharedAlias %>/common/exceptions/common-resource-not-found.exception';
+import { CommonUnauthorizedException } from '@<%= sharedAlias %>/common/exceptions/common-unauthorized.exception';
+import { CommonEnv } from '@<%= sharedAlias %>/common/infrastructure/enums/common-env.enum';
+import { CommonErrors } from '@<%= sharedAlias %>/common/infrastructure/enums/common-errors.enum';
 import type { Response } from 'express';
 
 /** Types of caught exceptions */

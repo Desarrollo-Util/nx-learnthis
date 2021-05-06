@@ -1,7 +1,7 @@
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { CommonEnv } from '@shared-kernel/common/infrastructure/enums/common-env.enum';
+import { CommonEnv } from '@<%= sharedAlias %>/common/infrastructure/enums/common-env.enum';
 
 @Module({
 	imports: [

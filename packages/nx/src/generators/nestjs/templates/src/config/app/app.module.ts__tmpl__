@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
-import { BC_SHARED_AUTH_Providers } from '@shared-kernel/auth/infrastructure/providers/auth.providers';
-import { SharedModule } from 'src/config/app/shared.module';
+import { BC_SHARED_AUTH_Providers } from '@<%= sharedAlias %>/auth/infrastructure/providers/auth.providers';
+import { SharedModule } from './shared.module';
 import { GqlModule } from '../graphql/graphql.module';
 import { MongoDBModule } from '../mongodb/mongodb.module';
 import { AllExceptionsFilter } from './errors/http-error.filter';

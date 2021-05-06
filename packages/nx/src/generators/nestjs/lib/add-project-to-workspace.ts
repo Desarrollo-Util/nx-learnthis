@@ -10,10 +10,12 @@ import type { NestJsNormalizedOptions } from 'packages/nx/src/generators/nestjs/
  * Adds project to workspace and configure targets for it
  * @param tree File system implementation
  * @param options Normalized CLI options
+ * @param sharedProjectName Shared-kernel project name
  */
 export const addProjectToWorkspace = (
 	tree: Tree,
-	options: NestJsNormalizedOptions
+	options: NestJsNormalizedOptions,
+	sharedProjectName: string
 ): void => {
 	const nxConfig: NxJsonProjectConfiguration = {
 		tags: options.parsedTags,
@@ -36,7 +38,7 @@ export const addProjectToWorkspace = (
 				options: {
 					cwd: options.projectRoot,
 					commands: [
-						'npx nx build shared-kernel',
+						`npx nx build ${sharedProjectName}`,
 						'npx nest build -p tsconfig.build.json',
 					],
 				},
