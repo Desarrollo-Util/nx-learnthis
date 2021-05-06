@@ -24,11 +24,28 @@ export const addProjectToWorkspace = (
 		sourceRoot: `${options.projectRoot}/src`,
 		projectType: 'application',
 		targets: {
+			serve: {
+				executor: '@nrwl/workspace:run-commands',
+				options: {
+					cwd: options.projectRoot,
+					commands: ['npx nest start --watch -p tsconfig.app.json'],
+				},
+			},
 			build: {
 				executor: '@nrwl/workspace:run-commands',
 				options: {
 					cwd: options.projectRoot,
-					commands: ['ttsc'],
+					commands: [
+						'npx nx build shared-kernel',
+						'npx nest build -p tsconfig.build.json',
+					],
+				},
+			},
+			start: {
+				executor: '@nrwl/workspace:run-commands',
+				options: {
+					cwd: options.projectRoot,
+					commands: [`node dist/${options.projectRoot}/main`],
 				},
 			},
 		},
