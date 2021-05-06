@@ -1,11 +1,12 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import type { ExecutionContext } from '@nestjs/common';
+import { createParamDecorator } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 /**
  * GQL decorator for get auth user
  */
 export const GetGqlAuthUser = createParamDecorator(
-	(_, ctx: GqlExecutionContext): any =>
+	(_, ctx: ExecutionContext): any =>
 		GqlExecutionContext.create(ctx).getContext().req.user
 );
 

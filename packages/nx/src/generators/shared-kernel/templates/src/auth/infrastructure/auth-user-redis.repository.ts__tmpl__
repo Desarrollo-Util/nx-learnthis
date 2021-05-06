@@ -1,6 +1,6 @@
 import { InjectRedis, Redis } from '@nestjs-modules/ioredis';
 import { Injectable } from '@nestjs/common';
-import { VOUuid } from '../../common/domain/value-objects/uuid.vo';
+import { VOUuid } from '@<%= projectName %>/common/domain/value-objects/uuid.vo';
 import { AuthUserModel } from '../domain/models/auth-user.model';
 import type { IAuthUserRepository } from '../domain/repository/auth-user-repository.interface';
 import type { AuthUserRedis } from './types/auth-user-redis.type';

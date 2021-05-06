@@ -3,6 +3,9 @@ import { logger, Tree, updateJson } from '@nrwl/devkit';
 /** Global tsconfig path */
 const TS_CONFIG_PATH = 'tsconfig.base.json';
 
+/** Global tsconfig path */
+const TS_BUILD_CONFIG_PATH = 'tsconfig.build.base.json';
+
 /**
  * Adds a new path alias to global tsconfig
  * @param tree File system implementation
@@ -26,5 +29,19 @@ export const addPathAliasToGlobalTsConfig = (
 		});
 	} else {
 		logger.warn(`Couldn't find ${TS_CONFIG_PATH} file to update`);
+	}
+
+	if (tree.exists(TS_BUILD_CONFIG_PATH)) {
+		updateJson(tree, TS_BUILD_CONFIG_PATH, (tsconfig: Record<string, any>) => {
+			const paths = tsconfig.compilerOptions.paths || {};
+
+			paths[`@${projectName}/*`] = [`${projectRoot}/*`];
+
+			tsconfig.compilerOptions.paths = paths;
+
+			return tsconfig;
+		});
+	} else {
+		logger.warn(`Couldn't find ${TS_BUILD_CONFIG_PATH} file to update`);
 	}
 };

@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { CommonEnv } from '../../../common/infrastructure/enums/common-env.enum';
+import { CommonEnv } from '@<%= projectName %>/common/infrastructure/enums/common-env.enum';
 import type { AuthTokenPayload } from '../types/auth-token-payload.type';
 
 /**

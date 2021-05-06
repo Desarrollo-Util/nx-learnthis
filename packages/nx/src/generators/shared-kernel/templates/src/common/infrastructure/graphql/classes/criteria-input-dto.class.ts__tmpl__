@@ -1,7 +1,7 @@
 import type { Type } from '@nestjs/common';
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { CriteriaOperator } from '../../../../common/domain/enums/criteria-operators.enum';
-import type { CriteriaFilterDtoClass } from '../../../../common/infrastructure/graphql/classes/criteria-filter.dto.class';
+import { CriteriaOperator } from '@<%= projectName %>/common/domain/enums/criteria-operators.enum';
+import type { CriteriaFilterDtoClass } from '@<%= projectName %>/common/infrastructure/graphql/classes/criteria-filter.dto.class';
 import type { CriteriaSortDtoClass } from './criteria-sort.dto.class';
 
 /** Output class type */

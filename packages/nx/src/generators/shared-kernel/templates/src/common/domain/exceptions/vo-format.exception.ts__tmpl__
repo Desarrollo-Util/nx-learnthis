@@ -1,4 +1,4 @@
-import { CommonFormatException } from '../../../common/exceptions/common-format.exception';
+import { CommonFormatException } from '@<%= projectName %>/common/exceptions/common-format.exception';
 
 /** Exception: Value object format */
 export class VOFormatException extends CommonFormatException {

@@ -1,6 +1,6 @@
-import { generateFiles, names, offsetFromRoot, Tree } from '@nrwl/devkit';
+import { generateFiles, Tree } from '@nrwl/devkit';
 import { join } from 'path';
-import type { SharedKernelNormalizedSchema } from '../schema';
+import type { SharedKernelNormalizedOptions } from '../schema';
 
 /**
  * Copies files from template directory into file system
@@ -9,19 +9,17 @@ import type { SharedKernelNormalizedSchema } from '../schema';
  */
 export const addFiles = (
 	tree: Tree,
-	options: SharedKernelNormalizedSchema
+	options: SharedKernelNormalizedOptions
 ): void => {
 	const templateOptions = {
 		...options,
-		...names(options.name),
-		offsetFromRoot: offsetFromRoot(options.projectRoot),
 		tmpl: '',
 	};
 
 	// Copy common files
 	generateFiles(
 		tree,
-		join(__dirname, '../templates/src'),
+		join(__dirname, '../templates'),
 		options.projectRoot,
 		templateOptions
 	);

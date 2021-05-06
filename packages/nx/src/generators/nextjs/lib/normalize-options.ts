@@ -20,6 +20,8 @@ export const normalizeOptions = (
 		? options.tags.split(',').map(s => s.trim())
 		: [];
 
+	parsedTags.push('next', projectName);
+
 	return {
 		...options,
 		projectName,
