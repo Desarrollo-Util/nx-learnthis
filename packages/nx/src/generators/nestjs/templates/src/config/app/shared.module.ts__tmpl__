@@ -1,0 +1,15 @@
+import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
+import { JwtModule } from '@nestjs/jwt';
+import { BC_SHARED_AUTH_Providers } from '../../shared/auth/infrastructure/providers/auth.providers';
+import { IoRedisModule } from '../redis/io-redis.module';
+
+/**
+ * Shared module
+ */
+@Module({
+	imports: [CqrsModule, IoRedisModule, JwtModule.register({})],
+	providers: [...BC_SHARED_AUTH_Providers],
+	exports: [],
+})
+export class SharedModule {}
