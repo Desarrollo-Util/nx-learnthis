@@ -6,7 +6,12 @@
 		"nextjs": {
 			"factory": "./src/generators/nextjs/generator",
 			"schema": "./src/generators/nextjs/schema.json",
-			"description": "nextjs generator"
+			"description": "Nextjs generator"
+		},
+		"nestjs": {
+			"factory": "./src/generators/nestjs/generator",
+			"schema": "./src/generators/nestjs/schema.json",
+			"description": "NestJs generator"
 		},
 		"shared-kernel": {
 			"factory": "./src/generators/shared-kernel/generator",

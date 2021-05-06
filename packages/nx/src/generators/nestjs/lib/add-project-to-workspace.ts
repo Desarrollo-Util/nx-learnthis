@@ -4,7 +4,7 @@ import {
 	ProjectConfiguration,
 	Tree,
 } from '@nrwl/devkit';
-import type { SharedKernelNormalizedOptions } from '../schema';
+import type { NestJsNormalizedOptions } from 'packages/nx/src/generators/nestjs/schema';
 
 /**
  * Adds project to workspace and configure targets for it
@@ -13,7 +13,7 @@ import type { SharedKernelNormalizedOptions } from '../schema';
  */
 export const addProjectToWorkspace = (
 	tree: Tree,
-	options: SharedKernelNormalizedOptions
+	options: NestJsNormalizedOptions
 ): void => {
 	const nxConfig: NxJsonProjectConfiguration = {
 		tags: options.parsedTags,
@@ -22,13 +22,13 @@ export const addProjectToWorkspace = (
 	const project: ProjectConfiguration = {
 		root: options.projectRoot,
 		sourceRoot: `${options.projectRoot}/src`,
-		projectType: 'library',
+		projectType: 'application',
 		targets: {
 			build: {
 				executor: '@nrwl/workspace:run-commands',
 				options: {
 					cwd: options.projectRoot,
-					commands: ['npx ttsc'],
+					commands: ['ttsc'],
 				},
 			},
 		},
