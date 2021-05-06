@@ -1,4 +1,5 @@
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
+import { Tags } from '../../../constants/tags.enum';
 import type { NextJsCLIOptions, NextJsNormalizedOptions } from '../schema';
 
 /**
@@ -16,11 +17,10 @@ export const normalizeOptions = (
 		'-'
 	);
 	const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectName}`;
-	const parsedTags = options.tags
-		? options.tags.split(',').map(s => s.trim())
-		: [];
+	const parsedTags = [Tags.NEXTJS, projectName];
 
-	parsedTags.push('next', projectName);
+	if (options.tags)
+		parsedTags.push(...options.tags.split(',').map(s => s.trim()));
 
 	return {
 		...options,

@@ -1,4 +1,5 @@
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
+import { Tags } from '../../../constants/tags.enum';
 import type {
 	SharedKernelCLIOptions,
 	SharedKernelNormalizedOptions,
@@ -23,11 +24,10 @@ export const normalizeOptions = (
 		'-'
 	);
 	const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectName}`;
-	const parsedTags = options.tags
-		? options.tags.split(',').map(s => s.trim())
-		: [];
+	const parsedTags: string[] = [Tags.NEXTJS, Tags.NEST_SHARED];
 
-	parsedTags.push('nest');
+	if (options.tags)
+		parsedTags.push(...options.tags.split(',').map(s => s.trim()));
 
 	return {
 		...options,

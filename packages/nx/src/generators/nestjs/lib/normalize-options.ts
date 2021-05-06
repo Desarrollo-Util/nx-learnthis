@@ -3,6 +3,7 @@ import type {
 	NestJsCLIOptions,
 	NestJsNormalizedOptions,
 } from 'packages/nx/src/generators/nestjs/schema';
+import { Tags } from '../../../constants/tags.enum';
 
 /**
  * Normalizes generator options obtained from CLI, adding:
@@ -23,11 +24,10 @@ export const normalizeOptions = (
 		'-'
 	);
 	const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectName}`;
-	const parsedTags = options.tags
-		? options.tags.split(',').map(s => s.trim())
-		: [];
+	const parsedTags = [Tags.NESTJS, projectName];
 
-	parsedTags.push('nest', projectName);
+	if (options.tags)
+		parsedTags.push(...options.tags.split(',').map(s => s.trim()));
 
 	return {
 		...options,
