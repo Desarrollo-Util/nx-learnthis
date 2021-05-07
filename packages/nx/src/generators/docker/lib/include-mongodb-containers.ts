@@ -1,3 +1,4 @@
+import { DOCKER_MONGO_CONFIG_FILE } from '../../../constants/docker-mongo-config-file.constant';
 import type { DockerGeneratorOptions } from '../schema';
 import type { DockerCompose } from '../types/docker-compose.type';
 
@@ -37,7 +38,7 @@ export const includeMongoDBContainers = (
 		ports: ['27017:27017'],
 		expose: [27017],
 		volumes: [
-			'./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro',
+			`./${DOCKER_MONGO_CONFIG_FILE}:/docker-entrypoint-initdb.d/init-mongo.js:ro`,
 			`${MONGO_VOLUME_NAME}:/bitnami/mongodb`,
 		],
 		networks: [options.networkName],

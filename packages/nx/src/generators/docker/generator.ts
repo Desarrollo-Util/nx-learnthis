@@ -1,5 +1,6 @@
 import type { Tree } from '@nrwl/devkit';
 import yaml from 'yaml';
+import { DOCKER_MONGO_CONFIG_FILE } from '../../constants/docker-mongo-config-file.constant';
 import {
 	createBaseDockerCompose,
 	includeMailhogContainer,
@@ -15,9 +16,12 @@ const DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml';
 export default async (tree: Tree, options: DockerCLIOptions) => {
 	const normalizedOptions = normalizeOptions(options);
 
-	if (tree.exists(DOCKER_COMPOSE_FILE_NAME))
+	if (
+		tree.exists(DOCKER_COMPOSE_FILE_NAME) ||
+		tree.exists(DOCKER_MONGO_CONFIG_FILE)
+	)
 		throw new Error(
-			'Already exists a docker compose file, please, remove it before execute this generator'
+			`Already exists a ${DOCKER_COMPOSE_FILE_NAME} or ${DOCKER_MONGO_CONFIG_FILE} in this directory. Please remove it before execute this generator`
 		);
 
 	const dockerCompose = createBaseDockerCompose(normalizedOptions);
@@ -37,4 +41,5 @@ export default async (tree: Tree, options: DockerCLIOptions) => {
 	const yamlDockerCompose = yaml.stringify(dockerCompose);
 
 	tree.write(DOCKER_COMPOSE_FILE_NAME, yamlDockerCompose);
+	tree.write(DOCKER_MONGO_CONFIG_FILE, '');
 };
