@@ -21,17 +21,15 @@ import { LoggingInterceptor } from './interceptor/logging.interceptor';
 			useFactory: (configService: ConfigService): RabbitMQModuleConfig => {
 				return {
 					uri: configService.get(CommonEnv.RABBITMQ_URI) as string,
-					prefix: '<%= projectName %>',
+					prefix: 'ahora',
 					retryTtl: Number(configService.get(CommonEnv.RABBITMQ_RETRY_TTL)),
-					prefetchCount: 5,
-					defaultExchangeType: 'topic',
 					connectionInitOptions: {
 						timeout: Number(configService.get(CommonEnv.RABBITMQ_CONN_TIMEOUT)),
 						wait: configService.get(CommonEnv.NODE_ENV) !== 'dev',
 					},
-					defaultSubscribeErrorBehavior: RabbitMQErrorHandlerTypes.REJECT,
-					connectionManagerOptions: {},
-					onConnectionClose: () => {},
+					onConnectionClose: () => {
+						process.exit(-1);
+					},
 				};
 			},
 			inject: [ConfigService],
