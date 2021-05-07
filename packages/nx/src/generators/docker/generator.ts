@@ -1,5 +1,6 @@
 import type { Tree } from '@nrwl/devkit';
 import yaml from 'yaml';
+import { DOCKER_COMPOSE_FILE_NAME } from '../../constants/docker-compose-file-name.constant';
 import { DOCKER_MONGO_CONFIG_FILE } from '../../constants/docker-mongo-config-file.constant';
 import {
 	createBaseDockerCompose,
@@ -11,8 +12,6 @@ import {
 } from './lib';
 import { updatePackageJsonScripts } from './lib/update-package-json-scripts';
 import type { DockerCLIOptions } from './schema';
-
-const DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml';
 
 export default async (tree: Tree, options: DockerCLIOptions) => {
 	const normalizedOptions = normalizeOptions(options);
