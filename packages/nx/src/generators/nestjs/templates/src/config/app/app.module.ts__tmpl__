@@ -1,19 +1,46 @@
+import {
+	CqrsModule,
+	RabbitMQErrorHandlerTypes,
+	RabbitMQModuleConfig,
+} from '@learnthis/nest-cqrs';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
 import { BC_SHARED_AUTH_Providers } from '@<%= sharedAlias %>/auth/infrastructure/providers/auth.providers';
-import { SharedModule } from './shared.module';
+import { CommonEnv } from '@<%= sharedAlias %>/common/infrastructure/enums/common-env.enum';
 import { GqlModule } from '../graphql/graphql.module';
 import { MongoDBModule } from '../mongodb/mongodb.module';
+import { IoRedisModule } from '../redis/io-redis.module';
 import { AllExceptionsFilter } from './errors/http-error.filter';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
 
 @Module({
 	imports: [
+		CqrsModule.registerAsync<RabbitMQModuleConfig>({
+			useFactory: (configService: ConfigService): RabbitMQModuleConfig => {
+				return {
+					uri: configService.get(CommonEnv.RABBITMQ_URI) as string,
+					prefix: '<%= projectName %>',
+					retryTtl: Number(configService.get(CommonEnv.RABBITMQ_RETRY_TTL)),
+					prefetchCount: 5,
+					defaultExchangeType: 'topic',
+					connectionInitOptions: {
+						timeout: Number(configService.get(CommonEnv.RABBITMQ_CONN_TIMEOUT)),
+						wait: configService.get(CommonEnv.NODE_ENV) !== 'dev',
+					},
+					defaultSubscribeErrorBehavior: RabbitMQErrorHandlerTypes.REJECT,
+					connectionManagerOptions: {},
+					onConnectionClose: () => {},
+				};
+			},
+			inject: [ConfigService],
+		}),
 		ConfigModule.forRoot({ isGlobal: true }),
 		GqlModule,
 		MongoDBModule,
-		SharedModule,
+		IoRedisModule,
+		JwtModule.register({}),
 	],
 	providers: [
 		...BC_SHARED_AUTH_Providers,

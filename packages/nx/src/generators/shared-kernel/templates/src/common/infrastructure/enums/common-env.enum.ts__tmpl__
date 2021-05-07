@@ -17,7 +17,9 @@ export enum CommonEnv {
 	/** RabbitMQ number of retries */
 	RABITMQ_RETRIES = 'RABITMQ_RETRIES',
 	/** RabbitMQ connection timeout */
-	RABBITMQ_CONN_TIMEOUT = 'RABBITMQ_CONN_TIMEOUT',
+	RABBITMQ_CONN_TIMEOUT = 'RABBITMQ_CONN_TIMEOUT',	
+	/** RabbitMQ retry TTL */
+	RABBITMQ_RETRY_TTL = 'RABBITMQ_RETRY_TTL',
 	/** Node ENV ('dev' or 'production') */
 	NODE_ENV = 'NODE_ENV',
 	/** Frontend Host */

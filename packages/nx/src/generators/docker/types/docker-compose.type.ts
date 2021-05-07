@@ -3,9 +3,9 @@ export type DockerCompose = {
 	/** Docker version */
 	version: string;
 	/** Docker services */
-	services: Record<string, object>;
+	services: Record<string, any>;
 	/** Docker volumes */
-	volumes: Record<string, object>;
+	volumes: Record<string, any>;
 	/** Docker networks */
-	networks: Record<string, object>;
+	networks: Record<string, any>;
 };

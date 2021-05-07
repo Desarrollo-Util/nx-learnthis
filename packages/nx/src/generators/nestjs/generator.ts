@@ -5,6 +5,7 @@ import { findProjectsByTag } from '../../utils/find-projects-by-tag';
 import {
 	addFiles,
 	addProjectToWorkspace,
+	generateEnvFile,
 	normalizeOptions,
 	updateDependencies,
 } from './lib';
@@ -29,6 +30,7 @@ export default async (tree: Tree, options: NestJsCLIOptions) => {
 		normalizedOptions.projectName,
 		normalizedOptions.projectRoot
 	);
+	generateEnvFile(tree, normalizedOptions);
 
 	return () => {
 		// Installs all package.json dependencies if not already installed
