@@ -18,6 +18,11 @@
 			"schema": "./src/generators/nestjs/schema.json",
 			"description": "NestJs generator"
 		},
+		"node-lib": {
+			"factory": "./src/generators/node-lib/generator",
+			"schema": "./src/generators/node-lib/schema.json",
+			"description": "Node library generator"
+		},
 		"shared-kernel": {
 			"factory": "./src/generators/shared-kernel/generator",
 			"schema": "./src/generators/shared-kernel/schema.json",

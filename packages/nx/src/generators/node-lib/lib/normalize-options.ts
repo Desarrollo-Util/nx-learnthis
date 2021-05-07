@@ -1,9 +1,6 @@
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
-import type {
-	NestJsCLIOptions,
-	NestJsNormalizedOptions,
-} from 'packages/nx/src/generators/nestjs/schema';
 import { Tags } from '../../../constants/tags.enum';
+import type { NodeLibCLIOptions, NodeLibNormalizedOptions } from '../schema';
 
 /**
  * Normalizes generator options obtained from CLI, adding:
@@ -17,14 +14,14 @@ import { Tags } from '../../../constants/tags.enum';
  */
 export const normalizeOptions = (
 	tree: Tree,
-	options: NestJsCLIOptions
-): NestJsNormalizedOptions => {
+	options: NodeLibCLIOptions
+): NodeLibNormalizedOptions => {
 	const projectName = names(options.name).fileName.replace(
 		new RegExp('/', 'g'),
 		'-'
 	);
-	const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectName}`;
-	const parsedTags = [Tags.NESTJS, Tags.NODE, projectName];
+	const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectName}`;
+	const parsedTags: string[] = [Tags.NODE];
 
 	if (options.tags)
 		parsedTags.push(...options.tags.split(',').map(s => s.trim()));
