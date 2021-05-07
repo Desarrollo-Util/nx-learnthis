@@ -1,17 +1,14 @@
-import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
+import type { Tree } from '@nrwl/devkit';
+import { addPackageJsonDependencies } from '../../../utils/add-package-json-dependencies';
 
 /**
  * Updates package.json with the new dependencies
  * @param tree File system implementation
  */
 export const updateDependencies = (tree: Tree): void => {
-	let dependencies: Record<string, string> = {
-		react: '^17.0.2',
-	};
+	const dependencies: string[] = ['react'];
 
-	let devDependencies: Record<string, string> = {
-		'@types/react': '^17.0.3',
-	};
+	const devDependencies: string[] = ['@types/react'];
 
-	addDependenciesToPackageJson(tree, dependencies, devDependencies);
+	addPackageJsonDependencies(tree, dependencies, devDependencies);
 };

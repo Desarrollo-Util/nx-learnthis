@@ -17,7 +17,8 @@
 		"update": "nx migrate latest",
 		"workspace-generator": "nx workspace-generator",
 		"dep-graph": "nx dep-graph",
-		"help": "nx help"
+		"help": "nx help",
+		"ncu": "node ./tools/update-dependencies.js"
 	},
 	"private": true,
 	"devDependencies": {
@@ -30,6 +31,7 @@
 		"@types/node": "14.14.37",
 		"cpx": "^1.5.0",
 		"dotenv": "8.2.0",
+		"npm-check-updates": "^11.5.10",
 		"prettier": "2.2.1",
 		"tailwindcss": "^2.1.1",
 		"ts-node": "~9.1.1",

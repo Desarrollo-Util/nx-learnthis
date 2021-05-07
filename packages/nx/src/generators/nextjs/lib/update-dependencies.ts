@@ -1,4 +1,5 @@
-import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
+import type { Tree } from '@nrwl/devkit';
+import { addPackageJsonDependencies } from '../../../utils/add-package-json-dependencies';
 import type { NextJsNormalizedOptions } from '../schema';
 
 /**
@@ -9,72 +10,46 @@ export const updateDependencies = (
 	tree: Tree,
 	options: NextJsNormalizedOptions
 ): void => {
-	let dependencies: Record<string, string> = {
-		next: '^10.1.3',
-		react: '^17.0.2',
-		'react-dom': '^17.0.2',
-		cookie: '^0.4.1',
-	};
+	const dependencies: string[] = ['next', 'react', 'react-dom', 'cookie'];
 
-	let devDependencies: Record<string, string> = {
-		'@babel/core': '7.9.6',
-		'@babel/preset-env': '7.9.6',
-		'@babel/preset-react': '7.9.4',
-		'@babel/preset-typescript': '7.9.0',
-		'@types/node': '^14.14.37',
-		'@types/react': '^17.0.3',
-		'@types/react-dom': '^17.0.3',
-		'@types/cookie': '^0.4.0',
-		autoprefixer: '^10.2.5',
-		postcss: '^8.2.9',
-		'stylelint-config-recommended': '^4.0.0',
-		tailwindcss: '^2.1.1',
-		'learnthis-tailwind-utils': '^0.0.6',
-	};
+	const devDependencies: string[] = [
+		'@babel/core',
+		'@babel/preset-env',
+		'@babel/preset-react',
+		'@babel/preset-typescript',
+		'@types/node',
+		'@types/react',
+		'@types/react-dom',
+		'@types/cookie',
+		'autoprefixer',
+		'postcss',
+		'stylelint-config-recommended',
+		'tailwindcss',
+		'learnthis-tailwind-utils',
+	];
 
 	if (options.template === 'auth') {
-		dependencies = {
-			...dependencies,
-			'@urql/exchange-auth': '^0.1.2',
-			'@urql/exchange-multipart-fetch': '^0.1.11',
-			urql: '^2.0.2',
-			'next-urql': '^3.0.1',
-			graphql: '^15.5.0',
-			jsonwebtoken: '^8.5.1',
-		};
+		dependencies.push(
+			'@urql/exchange-auth',
+			'@urql/exchange-multipart-fetch',
+			'urql',
+			'next-urql',
+			'graphql',
+			'jsonwebtoken'
+		);
 
-		devDependencies = {
-			...devDependencies,
-			'@types/jsonwebtoken': '^8.5.1',
-		};
+		devDependencies.push('@types/jsonwebtoken');
 	}
 
-	if (options.useToast) {
-		dependencies = {
-			...dependencies,
-			'react-toastify': '^7.0.3',
-		};
-	}
+	if (options.useToast) dependencies.push('react-toastify');
 
 	if (options.useFormikAndYup) {
-		dependencies = {
-			...dependencies,
-			formik: '^2.2.6',
-			yup: '^0.32.9',
-		};
+		dependencies.push('formik', 'yup');
 
-		devDependencies = {
-			...devDependencies,
-			'@types/yup': '^0.29.11',
-		};
+		devDependencies.push('@types/yup');
 	}
 
-	if (options.useUuid) {
-		dependencies = {
-			...dependencies,
-			'uuid-random': '^1.3.2',
-		};
-	}
+	if (options.useUuid) dependencies.push('uuid-random');
 
-	addDependenciesToPackageJson(tree, dependencies, devDependencies);
+	addPackageJsonDependencies(tree, dependencies, devDependencies);
 };
