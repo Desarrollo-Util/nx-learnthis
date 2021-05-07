@@ -1,0 +1,91 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"cli": "nx",
+	"id": "DockerCompose",
+	"title": "Docker compose generator",
+	"type": "object",
+	"properties": {
+		"prefix": {
+			"type": "string",
+			"description": "",
+			"$default": {
+				"$source": "argv",
+				"index": 0
+			},
+			"x-prompt": "Container names prefix"
+		},
+		"mongodb": {
+			"type": "boolean",
+			"default": true,
+			"x-prompt": {
+				"message": "Use MongoDB and Mongo Express?",
+				"type": "list",
+				"items": [
+					{
+						"value": true,
+						"label": "Yes"
+					},
+					{
+						"value": false,
+						"label": "No"
+					}
+				]
+			}
+		},
+		"redis": {
+			"type": "boolean",
+			"default": true,
+			"x-prompt": {
+				"message": "Use Redis and Redis Commander?",
+				"type": "list",
+				"items": [
+					{
+						"value": true,
+						"label": "Yes"
+					},
+					{
+						"value": false,
+						"label": "No"
+					}
+				]
+			}
+		},
+		"rabbitmq": {
+			"type": "boolean",
+			"default": true,
+			"x-prompt": {
+				"message": "Use RabbitMQ?",
+				"type": "list",
+				"items": [
+					{
+						"value": true,
+						"label": "Yes"
+					},
+					{
+						"value": false,
+						"label": "No"
+					}
+				]
+			}
+		},
+		"mailhog": {
+			"type": "boolean",
+			"default": true,
+			"x-prompt": {
+				"message": "Use Mailhog?",
+				"type": "list",
+				"items": [
+					{
+						"value": true,
+						"label": "Yes"
+					},
+					{
+						"value": false,
+						"label": "No"
+					}
+				]
+			}
+		}
+	},
+	"required": ["prefix", "mongodb", "redis", "rabbitmq", "mailhog"]
+}

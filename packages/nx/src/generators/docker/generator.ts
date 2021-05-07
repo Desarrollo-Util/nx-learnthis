@@ -1,0 +1,40 @@
+import type { Tree } from '@nrwl/devkit';
+import yaml from 'yaml';
+import {
+	createBaseDockerCompose,
+	includeMailhogContainer,
+	includeMongoDBContainers,
+	includeRabbitMQContainer,
+	includeRedisContainers,
+	normalizeOptions,
+} from './lib';
+import type { DockerCLIOptions } from './schema';
+
+const DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml';
+
+export default async (tree: Tree, options: DockerCLIOptions) => {
+	const normalizedOptions = normalizeOptions(options);
+
+	if (tree.exists(DOCKER_COMPOSE_FILE_NAME))
+		throw new Error(
+			'Already exists a docker compose file, please, remove it before execute this generator'
+		);
+
+	const dockerCompose = createBaseDockerCompose(normalizedOptions);
+
+	if (normalizedOptions.mongodb)
+		includeMongoDBContainers(dockerCompose, normalizedOptions);
+
+	if (normalizedOptions.redis)
+		includeRedisContainers(dockerCompose, normalizedOptions);
+
+	if (normalizedOptions.rabbitmq)
+		includeRabbitMQContainer(dockerCompose, normalizedOptions);
+
+	if (normalizedOptions.mailhog)
+		includeMailhogContainer(dockerCompose, normalizedOptions);
+
+	const yamlDockerCompose = yaml.stringify(dockerCompose);
+
+	tree.write(DOCKER_COMPOSE_FILE_NAME, yamlDockerCompose);
+};

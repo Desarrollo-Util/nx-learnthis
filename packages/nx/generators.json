@@ -17,6 +17,11 @@
 			"factory": "./src/generators/shared-kernel/generator",
 			"schema": "./src/generators/shared-kernel/schema.json",
 			"description": "Shared kernel generator"
+		},
+		"docker": {
+			"factory": "./src/generators/docker/generator",
+			"schema": "./src/generators/docker/schema.json",
+			"description": "Docker compose generator"
 		}
 	}
 }
