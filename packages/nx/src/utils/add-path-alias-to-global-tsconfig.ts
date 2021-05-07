@@ -15,7 +15,8 @@ const TS_BUILD_CONFIG_PATH = 'tsconfig.build.base.json';
 export const addPathAliasToGlobalTsConfig = (
 	tree: Tree,
 	projectName: string,
-	projectRoot: string
+	projectRoot: string,
+	registerOnBuild: boolean = true
 ): void => {
 	if (tree.exists(TS_CONFIG_PATH)) {
 		updateJson(tree, TS_CONFIG_PATH, (tsconfig: Record<string, any>) => {
@@ -31,17 +32,23 @@ export const addPathAliasToGlobalTsConfig = (
 		logger.warn(`Couldn't find ${TS_CONFIG_PATH} file to update`);
 	}
 
-	if (tree.exists(TS_BUILD_CONFIG_PATH)) {
-		updateJson(tree, TS_BUILD_CONFIG_PATH, (tsconfig: Record<string, any>) => {
-			const paths = tsconfig.compilerOptions.paths || {};
+	if (registerOnBuild) {
+		if (tree.exists(TS_BUILD_CONFIG_PATH)) {
+			updateJson(
+				tree,
+				TS_BUILD_CONFIG_PATH,
+				(tsconfig: Record<string, any>) => {
+					const paths = tsconfig.compilerOptions.paths || {};
 
-			paths[`@${projectName}/*`] = [`${projectRoot}/*`];
+					paths[`@${projectName}/*`] = [`${projectRoot}/*`];
 
-			tsconfig.compilerOptions.paths = paths;
+					tsconfig.compilerOptions.paths = paths;
 
-			return tsconfig;
-		});
-	} else {
-		logger.warn(`Couldn't find ${TS_BUILD_CONFIG_PATH} file to update`);
+					return tsconfig;
+				}
+			);
+		} else {
+			logger.warn(`Couldn't find ${TS_BUILD_CONFIG_PATH} file to update`);
+		}
 	}
 };

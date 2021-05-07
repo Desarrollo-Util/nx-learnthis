@@ -8,6 +8,11 @@
 			"schema": "./src/generators/nextjs/schema.json",
 			"description": "Nextjs generator"
 		},
+		"react-lib": {
+			"factory": "./src/generators/react-lib/generator",
+			"schema": "./src/generators/react-lib/schema.json",
+			"description": "React library generator"
+		},
 		"nestjs": {
 			"factory": "./src/generators/nestjs/generator",
 			"schema": "./src/generators/nestjs/schema.json",
