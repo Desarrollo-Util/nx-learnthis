@@ -9,6 +9,7 @@ import {
 	includeRedisContainers,
 	normalizeOptions,
 } from './lib';
+import { updatePackageJsonScripts } from './lib/update-package-json-scripts';
 import type { DockerCLIOptions } from './schema';
 
 const DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml';
@@ -42,4 +43,6 @@ export default async (tree: Tree, options: DockerCLIOptions) => {
 
 	tree.write(DOCKER_COMPOSE_FILE_NAME, yamlDockerCompose);
 	tree.write(DOCKER_MONGO_CONFIG_FILE, '');
+
+	updatePackageJsonScripts(tree, normalizedOptions);
 };
