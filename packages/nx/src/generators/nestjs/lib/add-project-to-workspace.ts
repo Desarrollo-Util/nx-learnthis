@@ -46,8 +46,8 @@ export const addProjectToWorkspace = (
 			start: {
 				executor: '@nrwl/workspace:run-commands',
 				options: {
-					cwd: options.projectRoot,
-					commands: [`node dist/${options.projectRoot}/main`],
+					cwd: `dist/${options.projectRoot}`,
+					commands: ['node main'],
 				},
 			},
 		},
