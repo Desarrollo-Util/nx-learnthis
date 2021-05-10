@@ -1,0 +1,33 @@
+import { Provider } from '@nestjs/common';
+
+/** Repositories */
+const Repositories: Provider[] = [];
+
+/** Query handlers */
+const QueryHandlers: Provider[] = [];
+
+/** Command handlers */
+const CommandHandlers: Provider[] = [];
+
+/** Event handlers */
+const EventHandlers: Provider[] = [];
+
+/** Use cases */
+const UseCases: Provider[] = [];
+
+/** Application service */
+const ApplicationServices: Provider[] = [];
+
+/** Graphql resolvers*/
+const Resolvers: Provider[] = [];
+
+/** Providers export */
+export const <%= provider %> = [
+	...Repositories,
+	...CommandHandlers,
+	...QueryHandlers,
+	...EventHandlers,
+	...UseCases,
+	...ApplicationServices,
+	...Resolvers,
+];

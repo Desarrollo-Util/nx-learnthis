@@ -1,14 +1,7 @@
 import { generateFiles, Tree } from '@nrwl/devkit';
 import { join } from 'path';
+import { pascalCaseToSnake } from '../../../utils/pascal-case-to-snake';
 import type { ReactComponentsNormalizedOptions } from '../schema';
-
-/**
- * Transforms pascal case to snake case
- * @param name Pascal case name
- * @returns Snake case name
- */
-const pascalCaseToSnake = (name: string): string =>
-	name.replace(/([A-Z])/g, (_, y) => '-' + y.toLowerCase()).replace(/^-/, '');
 
 /**
  * Creates the react components into the selected folder
