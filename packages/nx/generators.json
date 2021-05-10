@@ -13,6 +13,11 @@
 			"schema": "./src/generators/react-lib/schema.json",
 			"description": "React library generator"
 		},
+		"rc": {
+			"factory": "./src/generators/react-components/generator",
+			"schema": "./src/generators/react-components/schema.json",
+			"description": "React component generator"
+		},
 		"nestjs": {
 			"factory": "./src/generators/nestjs/generator",
 			"schema": "./src/generators/nestjs/schema.json",

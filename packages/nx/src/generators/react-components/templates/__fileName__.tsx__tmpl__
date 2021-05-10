@@ -1,0 +1,15 @@
+import type { FC } from 'react';
+
+/** Component props */
+type <%= componentName %>Props = {};
+
+/**
+ *
+ * @param props Component props
+ * @returns Component
+ */
+const <%= componentName %>: FC<<%= componentName %>Props> = () => {
+	return <></>;
+};
+
+export default <%= componentName %>;
