@@ -1,0 +1,10 @@
+import { AggregateRoot } from '@learnthis/nest-cqrs';
+
+/**
+ * Aggregate root: <%= moduleName %>
+ */
+export class <%= moduleName %>Model extends AggregateRoot {
+	constructor() {
+		super();
+	}
+}

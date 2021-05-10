@@ -1,0 +1,7 @@
+import { Inject } from '@nestjs/common';
+
+/** <%= moduleName %>'s repository dependency injection token */
+export const DIToken<%= moduleName %>Repository = Symbol('I<%= moduleName %>Repository');
+
+/** <%= moduleName %>'s repository dependency injection decorator */
+export const Inject<%= moduleName %>Repository = () => Inject(DIToken<%= moduleName %>Repository);

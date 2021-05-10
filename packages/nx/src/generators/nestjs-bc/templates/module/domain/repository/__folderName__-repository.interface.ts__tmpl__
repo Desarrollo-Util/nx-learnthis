@@ -1,0 +1,7 @@
+import { IRepository } from '@learnthis/nest-cqrs';
+import { <%= moduleName %>Model } from '../models/<%= folderName %>.model';
+
+/**
+ * <%= moduleName %>'s repository interface
+ */
+export interface I<%= moduleName %>Repository extends IRepository<<%= moduleName %>Model> {}
