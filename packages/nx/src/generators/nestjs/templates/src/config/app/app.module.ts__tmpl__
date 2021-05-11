@@ -20,7 +20,7 @@ import { LoggingInterceptor } from './interceptor/logging.interceptor';
 			useFactory: (configService: ConfigService): RabbitMQModuleConfig => {
 				return {
 					uri: configService.get(CommonEnv.RABBITMQ_URI) as string,
-					prefix: 'ahora',
+					prefix: '<%= project_name_underscored %>',
 					retryTtl: Number(configService.get(CommonEnv.RABBITMQ_RETRY_TTL)),
 					connectionInitOptions: {
 						timeout: Number(configService.get(CommonEnv.RABBITMQ_CONN_TIMEOUT)),

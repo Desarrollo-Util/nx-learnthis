@@ -15,6 +15,9 @@ export const addFiles = (
 ): void => {
 	const templateOptions = {
 		...options,
+		project_name_underscored: options.projectName
+			.toLowerCase()
+			.replace(/\-/g, '_'),
 		sharedAlias: sharedProjectName,
 		tmpl: '',
 	};

@@ -1,4 +1,5 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { findProjectsByTag } from 'packages/nx/src/utils/find-projects-by-tag';
 import { Tags } from '../../../constants/tags.enum';
 import {
 	isPascalCase,
@@ -49,8 +50,11 @@ export const normalizeOptions = (
 		),
 	];
 
+	const sharedAlias = findProjectsByTag(tree, Tags.NEST_SHARED)[0];
+
 	return {
 		...options,
+		sharedAlias,
 		bcNamePascal,
 		bcNameSnake: pascalCaseToSnake(bcNamePascal),
 		baseProjectSrc,

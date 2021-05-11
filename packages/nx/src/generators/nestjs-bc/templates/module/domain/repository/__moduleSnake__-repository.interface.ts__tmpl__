@@ -1,4 +1,4 @@
-import { IRepository } from '@learnthis/nest-cqrs';
+import { IRepository } from '@<%= sharedAlias %>/common/domain/interfaces/repository.interface';
 import { <%= modulePascal %>Model } from '../models/<%= moduleSnake %>.model';
 
 /**

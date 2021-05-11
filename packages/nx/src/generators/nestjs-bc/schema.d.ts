@@ -11,6 +11,8 @@ export interface NestJsBcCLIOptions {
 /** Normalized options, with project names */
 export interface NestJsBcNormalizedOptions
 	extends Omit<NestJsBcCLIOptions, 'modules'> {
+	/** Shared alias */
+	sharedAlias: string;
 	/** Bounded context name snakecase*/
 	bcNameSnake: string;
 	/** Base project src folder */

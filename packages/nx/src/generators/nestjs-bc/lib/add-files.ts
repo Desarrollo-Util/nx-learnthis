@@ -38,6 +38,7 @@ const addModule = (tree: Tree, options: NestJsBcNormalizedOptions): void => {
 		PROVIDERS_CONSTANT.push({ moduleSnake, provider });
 
 		const templateOptions = {
+			sharedAlias: options.sharedAlias,
 			modulePascal,
 			moduleSnake,
 			provider,
