@@ -15,9 +15,10 @@ const writeInitMongoAndGetConnectionString = (
 	tree: Tree,
 	options: NestJsNormalizedOptions
 ): string => {
-	const db = `${options.projectName}_db`;
-	const user = options.projectName;
-	const password = options.projectName;
+	const projectNameUnderscored = options.projectName.replace(/\-/g, '_');
+	const db = `${projectNameUnderscored}_db`;
+	const user = projectNameUnderscored;
+	const password = projectNameUnderscored;
 
 	let initMongo = (tree.read(DOCKER_MONGO_CONFIG_FILE) as Buffer).toString(
 		'utf-8'
