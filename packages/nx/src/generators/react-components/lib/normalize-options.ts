@@ -1,6 +1,6 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
-import { isPascalCase } from 'packages/nx/src/utils/pascal-case-to-snake';
 import { Tags } from '../../../constants/tags.enum';
+import { isPascalCase } from '../../../utils/pascal-case-to-snake';
 import type {
 	ReactComponentsCLIOptions,
 	ReactComponentsNormalizedOptions,

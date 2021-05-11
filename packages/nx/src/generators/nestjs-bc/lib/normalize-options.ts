@@ -1,9 +1,9 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { Tags } from '../../../constants/tags.enum';
 import {
 	isPascalCase,
 	pascalCaseToSnake,
-} from 'packages/nx/src/utils/pascal-case-to-snake';
-import { Tags } from '../../../constants/tags.enum';
+} from '../../../utils/pascal-case-to-snake';
 import type { NestJsBcCLIOptions, NestJsBcNormalizedOptions } from '../schema';
 
 /**
