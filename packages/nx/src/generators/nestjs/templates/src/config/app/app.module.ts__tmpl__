@@ -26,7 +26,7 @@ import { LoggingInterceptor } from './interceptor/logging.interceptor';
 						timeout: Number(configService.get(CommonEnv.RABBITMQ_CONN_TIMEOUT)),
 						wait: configService.get(CommonEnv.NODE_ENV) !== 'dev',
 					},
-					maxRetries: Number(configService.get(CommonEnv.RABITMQ_RETRIES)),
+					maxRetries: Number(configService.get(CommonEnv.RABBITMQ_RETRIES)),
 					onConnectionClose: () => {
 						process.exit(-1);
 					},
