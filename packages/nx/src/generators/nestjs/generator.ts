@@ -8,6 +8,7 @@ import {
 	generateEnvFile,
 	normalizeOptions,
 	updateDependencies,
+	updateTsconfigAlias,
 } from './lib';
 import type { NestJsCLIOptions } from './schema';
 
@@ -30,6 +31,7 @@ export default async (tree: Tree, options: NestJsCLIOptions) => {
 		normalizedOptions.projectName,
 		normalizedOptions.projectRoot
 	);
+	updateTsconfigAlias(tree, normalizedOptions);
 	generateEnvFile(tree, normalizedOptions);
 
 	return () => {

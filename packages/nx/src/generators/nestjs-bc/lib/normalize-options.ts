@@ -30,7 +30,7 @@ export const normalizeOptions = (
 		options.baseProjectName
 	);
 
-	if (!baseProjectConf.tags?.includes(Tags.NESTJS))
+	if (!baseProjectConf.tags?.includes(Tags.NESTJS_APP))
 		throw new Error(`${options.baseProjectName} is not a Nest.JS project`);
 
 	const baseProjectSrc = baseProjectConf.sourceRoot as string;

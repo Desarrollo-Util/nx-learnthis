@@ -24,7 +24,7 @@ export const normalizeOptions = (
 		'-'
 	);
 	const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectName}`;
-	const parsedTags: string[] = [Tags.NESTJS, Tags.NEST_SHARED, Tags.NODE];
+	const parsedTags: string[] = [Tags.NEST_SHARED, Tags.NODE_LIB];
 
 	if (options.tags)
 		parsedTags.push(...options.tags.split(',').map(s => s.trim()));

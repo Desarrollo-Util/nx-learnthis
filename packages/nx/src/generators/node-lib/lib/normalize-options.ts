@@ -21,7 +21,7 @@ export const normalizeOptions = (
 		'-'
 	);
 	const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectName}`;
-	const parsedTags: string[] = [Tags.NODE];
+	const parsedTags: string[] = [Tags.NODE_LIB];
 
 	if (options.tags)
 		parsedTags.push(...options.tags.split(',').map(s => s.trim()));

@@ -1,7 +1,7 @@
 export enum Tags {
-	NEXTJS = 'nextjs',
-	NESTJS = 'nestjs',
+	NEXTJS_APP = 'nextjs-app',
+	NESTJS_APP = 'nestjs-app',
 	REACT = 'react',
-	NODE = 'node',
-	NEST_SHARED = 'nest-shared',
+	NODE_LIB = 'node-lib',
+	NEST_SHARED = 'nestjs-shared',
 }

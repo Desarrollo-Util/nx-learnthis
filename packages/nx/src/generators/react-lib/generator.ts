@@ -18,8 +18,7 @@ export default async (tree: Tree, options: ReactLibCLIOptions) => {
 	addPathAliasToGlobalTsConfig(
 		tree,
 		normalizedOptions.projectName,
-		normalizedOptions.projectRoot,
-		false
+		normalizedOptions.projectRoot
 	);
 
 	return () => {

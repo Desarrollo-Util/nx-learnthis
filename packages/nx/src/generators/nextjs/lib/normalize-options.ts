@@ -17,7 +17,7 @@ export const normalizeOptions = (
 		'-'
 	);
 	const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectName}`;
-	const parsedTags = [Tags.NEXTJS, Tags.REACT, projectName];
+	const parsedTags = [Tags.NEXTJS_APP, Tags.REACT, projectName];
 
 	if (options.tags)
 		parsedTags.push(...options.tags.split(',').map(s => s.trim()));
