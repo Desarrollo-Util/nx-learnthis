@@ -5,6 +5,7 @@ import {
 	addProjectToWorkspace,
 	normalizeOptions,
 	updateDependencies,
+	updateNestProjectsTsconfig,
 } from './lib';
 import type { NodeLibCLIOptions } from './schema';
 
@@ -20,6 +21,7 @@ export default async (tree: Tree, options: NodeLibCLIOptions) => {
 		normalizedOptions.projectName,
 		normalizedOptions.projectRoot
 	);
+	updateNestProjectsTsconfig(tree, normalizedOptions);
 
 	return () => {
 		// Installs all package.json dependencies if not already installed
