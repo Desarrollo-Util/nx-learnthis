@@ -14,7 +14,7 @@
 			},
 			"x-prompt": "NestJs base project name"
 		},
-		"boundedContextName": {
+		"bcNamePascal": {
 			"type": "string",
 			"description": "Bounded context name",
 			"$default": {
@@ -33,5 +33,5 @@
 			"x-prompt": "Modules names (ModuleA, ModuleB)"
 		}
 	},
-	"required": ["baseProjectName", "boundedContextName", "modules"]
+	"required": ["baseProjectName", "bcNamePascal", "modules"]
 }
