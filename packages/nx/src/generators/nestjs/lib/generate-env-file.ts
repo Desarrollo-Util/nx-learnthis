@@ -100,6 +100,7 @@ export const generateEnvFile = (
 	env += `RABBITMQ_URI='${rabbitmqUri}'\n`;
 	env += 'RABBITMQ_CONN_TIMEOUT=20000\n';
 	env += 'RABBITMQ_RETRY_TTL=5000\n';
+	env += 'RABBITMQ_RETRIES=5\n';
 	env += '\n';
 	env += '# TOKENS\n';
 	env += "USER_JWT_SECRET='123456789'\n";

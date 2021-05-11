@@ -41,6 +41,7 @@ export const addProjectToWorkspace = (
 						`npx nx build ${sharedProjectName}`,
 						'npx nest build -p tsconfig.build.json',
 					],
+					parallel: false,
 				},
 			},
 			start: {
