@@ -6,12 +6,10 @@ export default async (tree: Tree, options: NestJsBcCLIOptions) => {
 	const normalizedOptions = normalizeOptions(tree, options);
 	if (
 		tree.exists(
-			`${normalizedOptions.baseProjectSrc}/${normalizedOptions.boundedContextName}`
+			`${normalizedOptions.baseProjectSrc}/${normalizedOptions.bcNamePascal}`
 		)
 	)
-		throw new Error(
-			`$${normalizedOptions.boundedContextName} folder already exists`
-		);
+		throw new Error(`$${normalizedOptions.bcNamePascal} folder already exists`);
 
 	addFiles(tree, normalizedOptions);
 };

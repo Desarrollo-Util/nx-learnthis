@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { MongoDBModule } from '../config/mongodb/mongodb.module';
-<% for(var i=0; i < providers.length; i++) { %>import { <%= providers[i].provider %> } from './<%= providers[i].folderName %>/infrastructure/providers/<%= providers[i].folderName %>.providers';
+<% for(var i=0; i < providers.length; i++) { %>import { <%= providers[i].provider %> } from './<%= providers[i].moduleSnake %>/infrastructure/providers/<%= providers[i].moduleSnake %>.providers';
 <% } %>
 
 
 /**
- * Public area bounded context module
+ * <%= bcPascal %> bounded context module
  */
 @Module({
 	imports: [MongoDBModule, JwtModule.register({})],
@@ -15,4 +15,4 @@ import { MongoDBModule } from '../config/mongodb/mongodb.module';
 		<% } %>
 	],
 })
-export class PublicAreaModule {}
+export class <%= bcPascal %>Module {}

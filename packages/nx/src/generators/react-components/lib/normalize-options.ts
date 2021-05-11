@@ -1,4 +1,5 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { isPascalCase } from 'packages/nx/src/utils/pascal-case-to-snake';
 import { Tags } from '../../../constants/tags.enum';
 import type {
 	ReactComponentsCLIOptions,
@@ -29,7 +30,7 @@ export const normalizeOptions = (
 				.filter(c => !!c)
 				.map(component => {
 					const trimmed = component.trim();
-					if (!trimmed.match(/^[a-zA-Z]+$/g))
+					if (!isPascalCase(trimmed))
 						throw new Error(`Invalid component name for ${trimmed}`);
 
 					return trimmed;

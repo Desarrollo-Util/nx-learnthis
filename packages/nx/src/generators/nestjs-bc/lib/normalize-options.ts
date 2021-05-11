@@ -1,4 +1,8 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import {
+	isPascalCase,
+	pascalCaseToSnake,
+} from 'packages/nx/src/utils/pascal-case-to-snake';
 import { Tags } from '../../../constants/tags.enum';
 import type { NestJsBcCLIOptions, NestJsBcNormalizedOptions } from '../schema';
 
@@ -16,9 +20,9 @@ export const normalizeOptions = (
 	tree: Tree,
 	options: NestJsBcCLIOptions
 ): NestJsBcNormalizedOptions => {
-	const bcName = options.boundedContextName.toLowerCase().trim();
-	if (!bcName.match(/^([a-z])+(\-)*([a-z])+$/g))
-		throw new Error(`${options.boundedContextName} is not a valid BC name`);
+	const bcNamePascal = options.bcNamePascal.trim();
+	if (!isPascalCase(bcNamePascal))
+		throw new Error(`${options.bcNamePascal} is not a valid BC name`);
 
 	const baseProjectConf = readProjectConfiguration(
 		tree,
@@ -37,7 +41,7 @@ export const normalizeOptions = (
 				.filter(c => !!c)
 				.map(module => {
 					const trimmed = module.trim();
-					if (!trimmed.match(/^[a-zA-Z]+$/g))
+					if (!isPascalCase(trimmed))
 						throw new Error(`Invalid module name for ${trimmed}`);
 
 					return trimmed;
@@ -47,7 +51,8 @@ export const normalizeOptions = (
 
 	return {
 		...options,
-		boundedContextName: bcName,
+		bcNamePascal,
+		bcNameSnake: pascalCaseToSnake(bcNamePascal),
 		baseProjectSrc,
 		parsedModules,
 	};

@@ -1,0 +1,7 @@
+import { Inject } from '@nestjs/common';
+
+/** <%= modulePascal %>'s repository dependency injection token */
+export const DIToken<%= modulePascal %>Repository = Symbol('I<%= modulePascal %>Repository');
+
+/** <%= modulePascal %>'s repository dependency injection decorator */
+export const Inject<%= modulePascal %>Repository = () => Inject(DIToken<%= modulePascal %>Repository);

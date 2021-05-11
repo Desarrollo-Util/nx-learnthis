@@ -10,7 +10,8 @@ const addBoundedContext = (
 	options: NestJsBcNormalizedOptions
 ): void => {
 	const templateOptions = {
-		bc: options.boundedContextName,
+		bcSnake: options.bcNameSnake,
+		bcPascal: options.bcNamePascal,
 		providers: PROVIDERS_CONSTANT,
 		tmpl: '',
 	};
@@ -18,27 +19,27 @@ const addBoundedContext = (
 	generateFiles(
 		tree,
 		join(__dirname, '../templates/bounded-context'),
-		`${options.baseProjectSrc}/${options.boundedContextName}`,
+		`${options.baseProjectSrc}/${options.bcNameSnake}`,
 		templateOptions
 	);
 };
 
 const addModule = (tree: Tree, options: NestJsBcNormalizedOptions): void => {
-	for (const moduleName of options.parsedModules) {
-		const folderName = pascalCaseToSnake(moduleName);
-		const bc_underscore = options.boundedContextName.replace(/\-/g, '_');
-		const module_underscore = folderName.replace(/\-/g, '_');
+	for (const modulePascal of options.parsedModules) {
+		const moduleSnake = pascalCaseToSnake(modulePascal);
+		const bc_underscore = options.bcNameSnake.replace(/\-/g, '_');
+		const module_underscore = moduleSnake.replace(/\-/g, '_');
 
 		const provider = `BC_${bc_underscore}_${module_underscore}_Providers`
 			.split('_')
 			.map(str => str.charAt(0).toUpperCase() + str.slice(1))
 			.join('_');
 
-		PROVIDERS_CONSTANT.push({ folderName, provider });
+		PROVIDERS_CONSTANT.push({ moduleSnake, provider });
 
 		const templateOptions = {
-			moduleName,
-			folderName,
+			modulePascal,
+			moduleSnake,
 			provider,
 			tmpl: '',
 		};
@@ -46,7 +47,7 @@ const addModule = (tree: Tree, options: NestJsBcNormalizedOptions): void => {
 		generateFiles(
 			tree,
 			join(__dirname, '../templates/module'),
-			`${options.baseProjectSrc}/${options.boundedContextName}/${folderName}`,
+			`${options.baseProjectSrc}/${options.bcNameSnake}/${moduleSnake}`,
 			templateOptions
 		);
 	}
