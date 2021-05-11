@@ -4,7 +4,7 @@ import {
 	ProjectConfiguration,
 	Tree,
 } from '@nrwl/devkit';
-import type { NestJsNormalizedOptions } from 'packages/nx/src/generators/nestjs/schema';
+import type { NestJsNormalizedOptions } from '../schema';
 
 /**
  * Adds project to workspace and configure targets for it

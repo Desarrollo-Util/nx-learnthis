@@ -1,6 +1,6 @@
 import { generateFiles, Tree } from '@nrwl/devkit';
-import type { NestJsNormalizedOptions } from 'packages/nx/src/generators/nestjs/schema';
 import { join } from 'path';
+import type { NestJsNormalizedOptions } from '../schema';
 
 /**
  * Copies files from template directory into file system

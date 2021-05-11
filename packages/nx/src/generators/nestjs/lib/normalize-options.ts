@@ -1,9 +1,6 @@
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
-import type {
-	NestJsCLIOptions,
-	NestJsNormalizedOptions,
-} from 'packages/nx/src/generators/nestjs/schema';
 import { Tags } from '../../../constants/tags.enum';
+import type { NestJsCLIOptions, NestJsNormalizedOptions } from '../schema';
 
 /**
  * Normalizes generator options obtained from CLI, adding:

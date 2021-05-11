@@ -1,6 +1,6 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
-import { findProjectsByTag } from 'packages/nx/src/utils/find-projects-by-tag';
 import { Tags } from '../../../constants/tags.enum';
+import { findProjectsByTag } from '../../../utils/find-projects-by-tag';
 import {
 	isPascalCase,
 	pascalCaseToSnake,

@@ -1,6 +1,6 @@
 {
 	"name": "@learnthis/nx",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"description": "An NX plugin for developing NextJS applications with Tailwind CSS.",
 	"keywords": [
 		"nx",
