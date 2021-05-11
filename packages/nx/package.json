@@ -1,6 +1,6 @@
 {
 	"name": "@learnthis/nx",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"description": "An NX plugin for developing NextJS applications with Tailwind CSS.",
 	"keywords": [
 		"nx",
@@ -16,5 +16,9 @@
 		"url": "https://github.com/Desarrollo-Util"
 	},
 	"main": "src/index.js",
-	"generators": "./generators.json"
+	"generators": "./generators.json",
+	"peerDependencies": {
+		"@nrwl/devkit": "12.0.1",
+		"yaml": "^2.0.0-5"
+	}
 }
