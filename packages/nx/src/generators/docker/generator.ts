@@ -21,7 +21,7 @@ export default async (tree: Tree, options: DockerCLIOptions) => {
 			name: 'value',
 			message: 'Pick Options',
 			choices: [
-				{ title: 'MongoDB and Mongo Express', value: 'mongo' },
+				{ title: 'MongoDB and Mongo Express', value: 'mongodb' },
 				{ title: 'RabbitMQ', value: '#rabbit' },
 				{ title: 'Redis and Redis Commander', value: 'redis' },
 				{ title: 'Mailhog', value: 'mailhog' },
