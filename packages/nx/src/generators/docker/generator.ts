@@ -1,4 +1,5 @@
 import type { Tree } from '@nrwl/devkit';
+import prompts from 'prompts';
 import yaml from 'yaml';
 import { DOCKER_COMPOSE_FILE_NAME } from '../../constants/docker-compose-file-name.constant';
 import { DOCKER_MONGO_CONFIG_FILE } from '../../constants/docker-mongo-config-file.constant';
@@ -14,6 +15,31 @@ import { updatePackageJsonScripts } from './lib/update-package-json-scripts';
 import type { DockerCLIOptions } from './schema';
 
 export default async (tree: Tree, options: DockerCLIOptions) => {
+	const result: string[] = (
+		await prompts({
+			type: 'multiselect',
+			name: 'value',
+			message: 'Pick Options',
+			choices: [
+				{ title: 'Use MongoDB and Mongo Express', value: 'mongo' },
+				{ title: 'Use RabbitMQ', value: '#rabbit' },
+				{ title: 'Use Redis and Redis Commander', value: 'redis' },
+				{ title: 'Use Mailhog', value: 'mailhog' },
+			],
+			hint: '- Space to select. Return to submit',
+		})
+	).value;
+
+	options = {
+		...options,
+		...result.reduce((acum, curr) => {
+			return {
+				...acum,
+				[curr]: true,
+			};
+		}, {}),
+	};
+
 	const normalizedOptions = normalizeOptions(options);
 
 	if (
