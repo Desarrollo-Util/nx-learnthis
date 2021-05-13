@@ -19,6 +19,7 @@
 	"generators": "./generators.json",
 	"dependencies": {
 		"@nrwl/devkit": "12.0.1",
+		"prompts": "^2.4.1",
 		"yaml": "^2.0.0-5"
 	}
 }

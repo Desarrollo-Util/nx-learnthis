@@ -5,15 +5,6 @@
 	"title": "DDD - NestJs Bounded Context Generator",
 	"type": "object",
 	"properties": {
-		"baseProjectName": {
-			"type": "string",
-			"description": "NestJs base project name",
-			"$default": {
-				"$source": "argv",
-				"index": 0
-			},
-			"x-prompt": "NestJs base project name"
-		},
 		"bcNamePascal": {
 			"type": "string",
 			"description": "Bounded context name",
@@ -33,5 +24,5 @@
 			"x-prompt": "Modules names (ModuleA, ModuleB)"
 		}
 	},
-	"required": ["baseProjectName", "bcNamePascal", "modules"]
+	"required": ["bcNamePascal", "modules"]
 }
