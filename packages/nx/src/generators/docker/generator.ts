@@ -21,10 +21,10 @@ export default async (tree: Tree, options: DockerCLIOptions) => {
 			name: 'value',
 			message: 'Pick Options',
 			choices: [
-				{ title: 'Use MongoDB and Mongo Express', value: 'mongo' },
-				{ title: 'Use RabbitMQ', value: '#rabbit' },
-				{ title: 'Use Redis and Redis Commander', value: 'redis' },
-				{ title: 'Use Mailhog', value: 'mailhog' },
+				{ title: 'MongoDB and Mongo Express', value: 'mongo' },
+				{ title: 'RabbitMQ', value: '#rabbit' },
+				{ title: 'Redis and Redis Commander', value: 'redis' },
+				{ title: 'Mailhog', value: 'mailhog' },
 			],
 			hint: '- Space to select. Return to submit',
 		})
