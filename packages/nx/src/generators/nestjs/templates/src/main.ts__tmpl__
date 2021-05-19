@@ -1,4 +1,5 @@
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { CommonEnv } from '@<%= sharedAlias %>/common/infrastructure/enums/common-env.enum';
 import { text as figletText } from 'figlet';
@@ -23,11 +24,13 @@ async function bootstrap() {
 	checkEnv();
 	const app = await NestFactory.create(AppModule);
 
-	const port: number = process.env[CommonEnv.PORT]
-		? Number(process.env[CommonEnv.PORT])
+	const configService: ConfigService = app.get(ConfigService);
+
+	const port: number = configService.get<string>(CommonEnv.PORT)
+		? Number(configService.get<string>(CommonEnv.PORT))
 		: 3000;
-	const self_domain: string = process.env[CommonEnv.SELF_DOMAIN]
-		? (process.env[CommonEnv.SELF_DOMAIN] as string)
+	const self_domain: string = configService.get<string>(CommonEnv.SELF_DOMAIN)
+		? (configService.get<string>(CommonEnv.SELF_DOMAIN) as string)
 		: 'http://localhost';
 
 	app.enableCors();
