@@ -51,6 +51,18 @@ export const addProjectToWorkspace = (
 					commands: ['node main'],
 				},
 			},
+			e2e: {
+				executor: '@nrwl/workspace:run-commands',
+				options: {
+					cwd: options.projectRoot,
+					commands: [
+						`npx nx build ${sharedProjectName}`,
+						'npx nest build -p tsconfig.build.json',
+						`npx jest --config ./test/jest-e2e.js --forceExit`,
+					],
+					parallel: false,
+				},
+			},
 		},
 	};
 
