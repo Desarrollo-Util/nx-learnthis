@@ -40,6 +40,7 @@ export const updateDependencies = (tree: Tree): void => {
 		'@types/node',
 		'@types/supertest',
 		'cpx',
+		'graphql-request',
 		'jest',
 		'rimraf',
 		'supertest',

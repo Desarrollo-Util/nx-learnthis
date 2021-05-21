@@ -1,0 +1,20 @@
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const { compilerOptions } = require('../../../tsconfig.base.json');
+const moduleNameMapper = pathsToModuleNameMapper(compilerOptions.paths);
+Object.keys(moduleNameMapper).map(
+	key =>
+		(moduleNameMapper[key] =
+			'../../../dist/' + moduleNameMapper[key].replace('src/', ''))
+);
+
+module.exports = {
+	preset: 'ts-jest',
+	testEnvironment: 'node',
+	testTimeout: 30000,
+	moduleNameMapper,
+	coverageDirectory: 'coverage',
+	testRegex: '.e2e-spec.ts$',
+	transform: {
+		'^.+\\.(t|j)s$': 'ts-jest',
+	},
+};

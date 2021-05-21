@@ -1,0 +1,82 @@
+import { DocumentNode } from 'graphql';
+import { GraphQLClient } from 'graphql-request';
+
+/**
+ * Response from a query or mutation
+ */
+type GraphQLResponse = {
+	/** On completed: Data */
+	data?: any;
+	/** On error: Parsed error */
+	errors?: any;
+};
+
+/**
+ * Wrapper for GraphQLClient, that catches and parses error messages
+ */
+export class GQLClient {
+	/** GraphQLClient */
+	private readonly client: GraphQLClient;
+	/** Current auth token */
+	private _authToken: string = '';
+
+	/**
+	 * Constructor
+	 * @param graphqlUri GraphQL absolute URI
+	 */
+	constructor(graphqlUri: string) {
+		this.client = new GraphQLClient(graphqlUri);
+	}
+
+	/**
+	 * Sends a GraphQL request trough the client
+	 * @param mutationOrQuery Query or mutation
+	 * @param variables Query/mutation variables
+	 */
+	async request(
+		mutationOrQuery: DocumentNode,
+		variables?: Object
+	): Promise<GraphQLResponse> {
+		return await this.client
+			.request(mutationOrQuery, variables)
+			.then(res => ({
+				data: res,
+			}))
+			.catch(err => {
+				try {
+					const index = err.message.indexOf(': ');
+
+					return {
+						errors: JSON.parse(
+							(err.message as string).substring(index + 2) as any
+						).response.errors,
+					};
+				} catch (error) {
+					return {
+						errors: err,
+					};
+				}
+			});
+	}
+
+	/**
+	 * Sets authorization header to Bearer token
+	 * @param jwt JWT token
+	 */
+	setAuthHeader(jwt: string): void {
+		this._authToken = jwt;
+		this.client.setHeader('authorization', `Bearer ${jwt}`);
+	}
+
+	/**
+	 * Removes authorization header and returns old token
+	 */
+	removeAndGetAuthHeader(): string {
+		const jwt = this._authToken;
+
+		this.client.setHeader('authorization', '');
+		this._authToken = '';
+
+		return jwt;
+	}
+}

@@ -1,0 +1,50 @@
+import { AppModule } from '@<%= project_name_underscored %>/config/app/app.module';
+import { INestApplication } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { Test, TestingModule } from '@nestjs/testing';
+import { CommonEnv } from '@shared-kernel/common/infrastructure/enums/common-env.enum';
+import { GQLClient } from './gql-client';
+import gql from 'graphql-tag';
+
+describe('Test (e2e)', () => {
+	let app: INestApplication;
+	let apolloClient: GQLClient;
+
+	beforeAll(async () => {
+		const moduleFixture: TestingModule = await Test.createTestingModule({
+			imports: [AppModule],
+		}).compile();
+
+		app = moduleFixture.createNestApplication();
+		await app.init();
+
+		const configService = moduleFixture.get(ConfigService);
+		const graphqlModule = moduleFixture.get(GraphQLModule);
+
+		apolloClient = new GQLClient(
+			configService.get(CommonEnv.SELF_DOMAIN) +
+				':' +
+				configService.get(CommonEnv.PORT) +
+				graphqlModule.apolloServer.graphqlPath
+		);
+
+		await app.listenAsync(Number(configService.get(CommonEnv.PORT)));
+	});
+
+	afterAll(async () => {
+		await app.close();
+	});
+
+	it('Test', async () => {
+		const res = await apolloClient.request(
+			gql(`
+			query {
+				test
+			}
+		`)
+		);
+
+		expect(res.data?.test).toBe(true);
+	});
+});
