@@ -1,5 +1,5 @@
 import tailwindPlugin from 'tailwindcss/plugin';
-import { TailwindVariants } from '../types/variants.type';
+import type { TailwindVariants } from '../types/variants.type';
 
 /**
  * A plugin that creates flex based classes
