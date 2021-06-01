@@ -1,0 +1,23 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"cli": "nx",
+	"id": "ReactLib",
+	"title": "React components generator",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "",
+			"$default": {
+				"$source": "argv",
+				"index": 0
+			},
+			"x-prompt": "Project name"
+		},
+		"components": {
+			"type": "string",
+			"x-prompt": "Component names (CompA, CompB)"
+		}
+	},
+	"required": ["name"]
+}

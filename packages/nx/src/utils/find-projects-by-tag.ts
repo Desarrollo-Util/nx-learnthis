@@ -9,7 +9,7 @@ import { readJson, Tree } from '@nrwl/devkit';
 export const findProjectsByTag = (tree: Tree, tag: string): string[] => {
 	const { projects } = readJson(tree, 'nx.json');
 
-	const projectNames = [];
+	const projectNames: string[] = [];
 
 	for (const project of Object.entries(projects)) {
 		const tags = (project[1] as any).tags as string[];

@@ -1,0 +1,10 @@
+import type { ComponentProps, FC } from 'react';
+
+/**
+ * <%= componentName.replace('Icon', '') %> icon
+ * @param props Component props
+ * @returns Component
+ */
+const <%= componentName %>: FC<ComponentProps<'svg'>> = props => ()
+
+export default <%= componentName %>;

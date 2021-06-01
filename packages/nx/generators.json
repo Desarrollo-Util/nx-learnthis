@@ -18,6 +18,11 @@
 			"schema": "./src/generators/react-components/schema.json",
 			"description": "React component generator"
 		},
+		"ri": {
+			"factory": "./src/generators/react-icons/generator",
+			"schema": "./src/generators/react-icons/schema.json",
+			"description": "React icon generator"
+		},
 		"nestjs": {
 			"factory": "./src/generators/nestjs/generator",
 			"schema": "./src/generators/nestjs/schema.json",
