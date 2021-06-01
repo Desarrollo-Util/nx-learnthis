@@ -31,7 +31,9 @@ export const absolutePlugin = (
 
 		for (let i = from; i <= to; i += increment) {
 			for (const position of POSITIONS) {
-				const name = `.${position}-${String(i).replace('.', '_')}`;
+				const name = `.${i < 0 ? '-' : ''}${position}-${String(i)
+					.replace('.', '_')
+					.replace('-', '')}`;
 				let style = {};
 				style[position] = `${i}rem`;
 
