@@ -1,8 +1,8 @@
 {
 	"$schema": "http://json-schema.org/schema",
 	"cli": "nx",
-	"id": "ReactLib",
-	"title": "React components generator",
+	"id": "ReactIcons",
+	"title": "React icons generator",
 	"type": "object",
 	"properties": {
 		"name": {
@@ -16,7 +16,7 @@
 		},
 		"components": {
 			"type": "string",
-			"x-prompt": "Component names (CompA, CompB)"
+			"x-prompt": "Icon names (NameAIcon, NameBIcon)"
 		}
 	},
 	"required": ["name"]
