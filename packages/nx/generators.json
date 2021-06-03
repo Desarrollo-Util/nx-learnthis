@@ -43,6 +43,11 @@
 			"schema": "./src/generators/shared-kernel/schema.json",
 			"description": "Shared kernel generator"
 		},
+		"next-shared": {
+			"factory": "./src/generators/next-shared/generator",
+			"schema": "./src/generators/next-shared/schema.json",
+			"description": "Next JS shared generator"
+		},
 		"docker": {
 			"factory": "./src/generators/docker/generator",
 			"schema": "./src/generators/docker/schema.json",
