@@ -31,8 +31,8 @@ export const generateResponsiveScreens = (
 		xs: { max: `${xs}px` },
 		sm: { min: `${xs + 1}px`, max: `${sm}px` },
 		md: { min: `${sm + 1}px`, max: `${md}px` },
-		lg: { min: `${md + 1}px` },
-		xl: { min: `${lg + 1}px`},
+		lg: { min: `${md + 1}px`, max: `${lg}px` },
+		xl: { min: `${lg + 1}px` },
 		xssm: { max: `${sm}px` },
 		xsmd: { max: `${md}px` },
 		xslg: { max: `${lg}px` },
@@ -41,5 +41,6 @@ export const generateResponsiveScreens = (
 		smxl: { min: `${xs + 1}px` },
 		mdlg: { min: `${sm + 1}px`, max: `${lg}px` },
 		mdxl: { min: `${sm + 1}px` },
+		lgxl: { min: `${md + 1}px` },
 	};
 };
