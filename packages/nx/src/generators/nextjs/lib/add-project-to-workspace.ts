@@ -1,6 +1,5 @@
 import {
 	addProjectConfiguration,
-	NxJsonProjectConfiguration,
 	ProjectConfiguration,
 	Tree,
 } from '@nrwl/devkit';
@@ -15,10 +14,6 @@ export const addProjectToWorkspace = (
 	tree: Tree,
 	options: NextJsNormalizedOptions
 ): void => {
-	const nxConfig: NxJsonProjectConfiguration = {
-		tags: options.parsedTags,
-	};
-
 	const project: ProjectConfiguration = {
 		root: options.projectRoot,
 		sourceRoot: `${options.projectRoot}/src`,
@@ -50,6 +45,5 @@ export const addProjectToWorkspace = (
 
 	addProjectConfiguration(tree, options.projectName, {
 		...project,
-		...nxConfig,
 	});
 };
