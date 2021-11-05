@@ -1,98 +1,200 @@
 const {
-  generateResponsiveScreens,
-  generatePixelRules,
-  generateRemRules,
-  generateIntRules,
-  flexPlugin,
-  absolutePlugin,
-  transitionPlugin,
-  truncatePlugin,
-  containerPlugin,
-} = require('learnthis-tailwind-utils');
-
-const defaultTheme = require('tailwindcss/defaultTheme');
+	generateResponsiveScreens,
+	generatePixelRules,
+	generateRemRules,
+	generateIntRules,
+	flexPlugin,
+	absolutePlugin,
+	transitionPlugin,
+	truncatePlugin,
+	containerPlugin,
+	generateColumnRules,
+} = require('@learnthis/tailwind-utils');
 
 const colors = {
-  primary: {
-    300: '#9EF0F0',
-    DEFAULT: '#25CCCC',
-    700: '#129C9C',
-    800: '#006E6E',
-  },
+	bg: {
+		700: '#1d1e26',
+		DEFAULT: '#2b2b36',
+		300: '#353641',
+	},
+	bgalt: {
+		700: '#563DFF',
+		DEFAULT: '#694EFF',
+		300: '#9683FF',
+	},
+	primary: {
+		700: '#028DF1',
+		DEFAULT: '#039FF4',
+		300: '#4FBCF7',
+	},
+	secondary: {
+		700: '#542CA7',
+		DEFAULT: '#673AB7',
+		300: '#9575CD',
+	},
+	accent: {
+		700: '#FFB305',
+		DEFAULT: '#FFC107',
+		300: '#FFD451',
+	},
+	error: {
+		700: '#C22525',
+		DEFAULT: '#CE3131',
+		300: '#DD6F6F',
+	},
+	warning: {
+		700: '#FAB800',
+		DEFAULT: '#FBC500',
+		300: '#FCD64D',
+	},
+	success: {
+		700: '#0EA163',
+		DEFAULT: '#13B176',
+		300: '#5AC89F',
+	},
+	gray: {
+		700: '#6D7A8C',
+		DEFAULT: '#808D9E',
+		300: '#A6AFBB',
+	},
+	blue: {
+		700: '#2F52BA',
+		DEFAULT: '#2F52BA',
+		300: '#2F52BA',
+	},
+	orange: {
+		700: '#F57800',
+		DEFAULT: '#F78B00',
+		300: '#F9AE4D',
+	},
+	pink: {
+		700: '#FF498D',
+		DEFAULT: '#FF5B9F',
+		300: '#FF8CBC',
+	},
+	white: {
+		DEFAULT: '#FFFFFF',
+	},
+	black: {
+		DEFAULT: '#000000',
+	},
+	transparent: {
+		DEFAULT: '#00000000',
+	},
 };
 
 const standardRemValues = {
-  ...generateRemRules(0, 5, 0.125),
-  ...generateRemRules(5, 10, 0.25),
-  ...generateRemRules(10, 25, 0.5),
-  ...generateRemRules(25, 100, 1),
+	...generateRemRules(0, 5, 0.125),
+	...generateRemRules(5, 10, 0.25),
+	...generateRemRules(10, 25, 0.5),
+	...generateRemRules(25, 100, 1),
 };
 
+const negativeRemValues = { ...generateRemRules(-5, 0, 0.125) };
+
 const breakpoints = {
-  xs: 450,
-  sm: 768,
-  md: 1024,
-  lg: 1280,
+	xs: 450,
+	sm: 768,
+	md: 1024,
+	lg: 1280,
 };
 
 module.exports = {
-  purge: ['./src/**/*.{ts,tsx}'],
-  theme: {
-    screens: generateResponsiveScreens(
-      breakpoints.xs,
-      breakpoints.sm,
-      breakpoints.md
-    ),
-    borderWidth: generatePixelRules(0, 10),
-    fontSize: generatePixelRules(10, 60),
-    padding: {
-      ...standardRemValues,
-    },
-    margin: {
-      ...standardRemValues,
-    },
-    height: {
-      ...standardRemValues,
-    },
-    width: {
-      ...defaultTheme.width,
-      ...standardRemValues,
-    },
-    maxHeight: {
-      ...defaultTheme.maxHeight,
-      ...standardRemValues,
-    },
-    maxWidth: {
-      ...defaultTheme.maxWidth,
-      ...standardRemValues,
-    },
-    minHeight: {
-      ...defaultTheme.minHeight,
-      ...standardRemValues,
-    },
-    minWidth: {
-      ...defaultTheme.minWidth,
-      ...standardRemValues,
-    },
-    zIndex: generateIntRules(-100, 100),
-    colors,
-    fill: colors,
-  },
-  variants: {
-    extend: {
-      borderOpacity: ['disabled'],
-      borderWidth: ['disabled'],
-      borderColor: ['responsive', 'focus', 'disabled'],
-      backgroundColor: ['responsive', 'hover', 'disabled'],
-      textColor: ['responsive', 'hover', 'disabled'],
-      cursor: ['disabled'],
-    },
-  },
-  plugins: [
-    flexPlugin(),
-    absolutePlugin(0, 5, 0.125),
-    transitionPlugin(0, 2000, 125),
-    truncatePlugin(20),
-    containerPlugin(breakpoints),
-  ],
+	purge: ['./src/**/*.{ts,tsx}', '../../libs/ui-components/src/**/*.{ts,tsx}'],
+	theme: {
+		screens: generateResponsiveScreens(
+			breakpoints.xs,
+			breakpoints.sm,
+			breakpoints.md,
+			breakpoints.lg
+		),
+		borderWidth: generatePixelRules(0, 10),
+		fontSize: generatePixelRules(10, 60),
+		padding: {
+			...standardRemValues,
+			full: '100%',
+		},
+		margin: {
+			...standardRemValues,
+			...negativeRemValues,
+		},
+		height: {
+			auto: 'auto',
+			screen: '100vh',
+			full: '100%',
+			...standardRemValues,
+		},
+		width: {
+			auto: 'auto',
+			screen: '100vw',
+			full: '100%',
+			...generateColumnRules([2, 3, 4, 5, 6, 8, 10, 12]),
+			...standardRemValues,
+		},
+		maxHeight: {
+			auto: 'auto',
+			screen: '100vh',
+			full: '100%',
+			...standardRemValues,
+		},
+		maxWidth: {
+			auto: 'auto',
+			screen: '100vw',
+			full: '100%',
+			...standardRemValues,
+		},
+		minHeight: {
+			auto: 'auto',
+			screen: '100vh',
+			full: '100%',
+			...standardRemValues,
+		},
+		minWidth: {
+			auto: 'auto',
+			screen: '100vw',
+			full: '100%',
+			...standardRemValues,
+		},
+		top: {},
+		right: {},
+		left: {},
+		bottom: {},
+		zIndex: generateIntRules(-100, 100),
+		colors,
+		fill: colors,
+		extend: {
+			keyframes: {
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translate3d(0,20px,0)',
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translate3d(0,0,0)',
+					},
+				},
+			},
+			animation: {
+				'fade-in-up': 'fade-in-up 0.25s ease-out',
+			},
+		},
+	},
+	variants: {
+		extend: {
+			borderOpacity: ['disabled'],
+			borderWidth: ['disabled'],
+			borderColor: ['responsive', 'focus', 'disabled'],
+			backgroundColor: ['responsive', 'hover', 'disabled'],
+			textColor: ['responsive', 'hover', 'disabled'],
+			cursor: ['disabled'],
+		},
+	},
+	plugins: [
+		flexPlugin(['responsive']),
+		absolutePlugin(-5, 5, 0.125),
+		transitionPlugin(0, 2000, 125),
+		truncatePlugin(20),
+		containerPlugin(breakpoints),
+	],
 };
