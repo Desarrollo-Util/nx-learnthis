@@ -1,7 +1,5 @@
 {
 	"version": 2,
-	"cli": { "defaultCollection": "@nrwl/node" },
-	"defaultProject": "tailwind-utils",
 	"projects": {
 		"nx": {
 			"root": "packages/nx",
@@ -36,7 +34,8 @@
 						]
 					}
 				}
-			}
+			},
+			"tags": []
 		},
 		"tailwind-utils": {
 			"root": "libs/tailwind-utils",
@@ -52,7 +51,8 @@
 						]
 					}
 				}
-			}
+			},
+			"tags": []
 		}
 	}
 }

@@ -1,20 +1,33 @@
 {
 	"implicitDependencies": {
 		"workspace.json": "*",
-		"package.json": { "dependencies": "*", "devDependencies": "*" },
+		"package.json": {
+			"dependencies": "*",
+			"devDependencies": "*"
+		},
 		"tsconfig.base.json": "*",
 		"tslint.json": "*",
 		".eslintrc.json": "*",
 		"nx.json": "*"
 	},
-	"affected": { "defaultBase": "master" },
+	"affected": {
+		"defaultBase": "master"
+	},
 	"npmScope": "nx-learnthis",
 	"tasksRunnerOptions": {
 		"default": {
 			"runner": "@nrwl/workspace/tasks-runners/default",
-			"options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+			"options": {
+				"cacheableOperations": ["build", "lint", "test", "e2e"]
+			}
 		}
 	},
-	"workspaceLayout": { "appsDir": "libs", "libsDir": "packages" },
-	"projects": { "nx": { "tags": [] }, "tailwind-utils": { "tags": [] } }
+	"workspaceLayout": {
+		"appsDir": "libs",
+		"libsDir": "packages"
+	},
+	"cli": {
+		"defaultCollection": "@nrwl/node"
+	},
+	"defaultProject": "tailwind-utils"
 }
