@@ -16,10 +16,10 @@ export const generateIntRules = (from: number, to: number) => {
 	if (!Number.isInteger(from) || !Number.isInteger(to))
 		throw new Error('generateIntRules: "from" and "to" values must be integer');
 
-	const rules: Record<number, number> = {};
+	const rules: Record<string, string> = {};
 
 	for (let i = from; i <= to; i++) {
-		rules[i] = i;
+		rules[`${i}`] = `${i}`;
 	}
 
 	return rules;

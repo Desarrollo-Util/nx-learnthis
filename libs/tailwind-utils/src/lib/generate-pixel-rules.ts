@@ -18,10 +18,10 @@ export const generatePixelRules = (from: number, to: number) => {
 			'generatePixelRules: "from" and "to" values must be integer'
 		);
 
-	const rules: Record<number, string> = {};
+	const rules: Record<string, string> = {};
 
 	for (let i = from; i <= to; i++) {
-		rules[i] = `${i}px`;
+		rules[`${i}`] = `${i}px`;
 	}
 
 	return rules;
