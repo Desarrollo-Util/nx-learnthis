@@ -1,18 +1,16 @@
-import tailwindPlugin from 'tailwindcss/plugin';
-import type { TailwindVariants } from '../types/variants.type';
+import plugin from 'tailwindcss/plugin';
 
 /**
  * A plugin that creates truncate lines classes
  * @param maxLines Maximum number of lines
- * @param increment Increment between rules
  * @param variants Tailwind variants
  * @returns Tailwind plugin
  */
-export const truncatePlugin = (
-	maxLines: number,
-	variants?: TailwindVariants[]
-) =>
-	tailwindPlugin(({ addUtilities }) => {
+export const truncatePlugin = (maxLines: number, variants?: string[]) =>
+	plugin(({ addUtilities }) => {
+		if (typeof maxLines !== 'number')
+			throw new Error('truncatePlugin: "maxLines" must be provided as number');
+
 		const rules: Record<string, Object>[] = [];
 
 		for (let i = 1; i <= maxLines; i++) {

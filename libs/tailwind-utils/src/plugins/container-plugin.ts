@@ -1,5 +1,4 @@
 import tailwindPlugin from 'tailwindcss/plugin';
-import type { TailwindVariants } from '../types/variants.type';
 
 /** Resolution breakpoints */
 type BreakPoints = {
@@ -25,7 +24,7 @@ type BreakPoints = {
  */
 export const containerPlugin = (
 	breakpoints: BreakPoints,
-	variants?: TailwindVariants[]
+	variants?: string[]
 ) =>
 	tailwindPlugin(({ addUtilities }) => {
 		const { xs, sm, md, lg } = breakpoints;
@@ -34,19 +33,15 @@ export const containerPlugin = (
 			typeof xs !== 'number' ||
 			typeof sm !== 'number' ||
 			typeof md !== 'number' ||
-			typeof lg !== 'number'
-		)
-			throw new Error(
-				'ContainerPlugin: All breakpoints "xs", "sm", "md" and "lg" must be provided'
-			);
-
-		if (
+			typeof lg !== 'number' ||
 			!Number.isInteger(xs) ||
 			!Number.isInteger(sm) ||
 			!Number.isInteger(md) ||
 			!Number.isInteger(lg)
 		)
-			throw new Error('All breakpoints must be integer');
+			throw new Error(
+				'containerPlugin: All breakpoints "xs", "sm", "md" and "lg" must be provided as integer numbers'
+			);
 
 		const rules: Record<string, Object>[] = [];
 

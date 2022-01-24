@@ -19,7 +19,7 @@ export const generateRemRules = (
 		typeof increment !== 'number'
 	)
 		throw new Error(
-			'generateRemRules: You must specify "from", "to" and "increment" values'
+			'generateRemRules: "from", "to" and "increment" must be provided as numbers'
 		);
 
 	const rules: Record<string, string> = {};

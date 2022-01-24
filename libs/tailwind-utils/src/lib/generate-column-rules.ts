@@ -13,7 +13,9 @@ export const generateColumnRules = (
 
 	columns.forEach(column => {
 		if (!Number.isInteger(column))
-			throw new Error('generateColumnRules: all elements must be integers');
+			throw new Error(
+				'generateColumnRules: all elements must be integer numbers'
+			);
 
 		for (let i = 1; i < column; i++) {
 			const ruleName = `${i}/${column}`;

@@ -19,7 +19,7 @@ export const generateResponsiveScreens = (
 		typeof lg !== 'number'
 	)
 		throw new Error(
-			'generateResponsiveScreens: All breakpoints "xs", "sm", "md" and "lg" must be provided'
+			'generateResponsiveScreens: All breakpoints "xs", "sm", "md" and "lg" must be provided as numbers'
 		);
 
 	if (!Number.isInteger(xs) || !Number.isInteger(sm) || !Number.isInteger(md))

@@ -1,12 +1,11 @@
 import tailwindPlugin from 'tailwindcss/plugin';
-import type { TailwindVariants } from '../types/variants.type';
 
 /**
  * A plugin that creates flex based classes
  * @param variants Tailwind variants
  * @returns Tailwind plugin
  */
-export const flexPlugin = (variants?: TailwindVariants[]) =>
+export const flexPlugin = (variants?: string[]) =>
 	tailwindPlugin(({ addUtilities }) => {
 		const source: [Object, string][] = [
 			[{ display: 'flex' }, '.flex'],

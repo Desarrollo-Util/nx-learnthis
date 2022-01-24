@@ -8,14 +8,14 @@
  * @returns Rules
  */
 export const generatePixelRules = (from: number, to: number) => {
-	if (typeof from !== 'number' || typeof to !== 'number')
+	if (
+		typeof from !== 'number' ||
+		typeof to !== 'number' ||
+		!Number.isInteger(from) ||
+		!Number.isInteger(to)
+	)
 		throw new Error(
-			'generatePixelRules: You must specify "from" and "to" values'
-		);
-
-	if (!Number.isInteger(from) || !Number.isInteger(to))
-		throw new Error(
-			'generatePixelRules: "from" and "to" values must be integer'
+			'generatePixelRules: "from" and "to" must be provided as integer numbers'
 		);
 
 	const rules: Record<string, string> = {};

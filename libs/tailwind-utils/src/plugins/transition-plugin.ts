@@ -1,5 +1,4 @@
-import tailwindPlugin from 'tailwindcss/plugin';
-import type { TailwindVariants } from '../types/variants.type';
+import plugin from 'tailwindcss/plugin';
 
 /**
  * A plugin that creates transition classes
@@ -13,16 +12,16 @@ export const transitionPlugin = (
 	minTime: number,
 	maxTime: number,
 	increment: number,
-	variants?: TailwindVariants[]
+	variants?: string[]
 ) =>
-	tailwindPlugin(({ addUtilities }) => {
+	plugin(({ addUtilities }) => {
 		if (
 			typeof minTime !== 'number' ||
 			typeof maxTime !== 'number' ||
 			typeof increment !== 'number'
 		)
 			throw new Error(
-				'TransitionPlugin: You must specify "from", "to" and "increment" values'
+				'transitionPlugin: "from", "to" and "increment" must be provided as numbers'
 			);
 
 		const types = [

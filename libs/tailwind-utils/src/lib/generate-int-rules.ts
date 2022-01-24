@@ -8,13 +8,15 @@
  * @returns Rules
  */
 export const generateIntRules = (from: number, to: number) => {
-	if (typeof from !== 'number' || typeof to !== 'number')
+	if (
+		typeof from !== 'number' ||
+		typeof to !== 'number' ||
+		!Number.isInteger(from) ||
+		!Number.isInteger(to)
+	)
 		throw new Error(
-			'generateIntRules: You must specify "from" and "to" values'
+			'generateIntRules: "from" and "to" must be provided as integer numbers'
 		);
-
-	if (!Number.isInteger(from) || !Number.isInteger(to))
-		throw new Error('generateIntRules: "from" and "to" values must be integer');
 
 	const rules: Record<string, string> = {};
 
